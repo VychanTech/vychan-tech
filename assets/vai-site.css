@@ -35,6 +35,8 @@ h2 { margin-top: 30px; }
 .pill { display: inline-block; margin-bottom: 10px; padding: 4px 9px; border-radius: 999px; background: #eef7f4; color: var(--accent-dark); font-size: 12px; font-weight: 800; }
 .price { font-size: 24px; font-weight: 800; }
 .steps { line-height: 1.8; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 18px 18px 18px 38px; max-width: 760px; }
+.small { color: var(--muted); font-size: 14px; line-height: 1.5; max-width: 760px; }
+code { background: #eef4f8; border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; }
 .notice { background: #fff7df; border: 1px solid #f0d48a; color: #6b4f00; padding: 14px; border-radius: 8px; max-width: 720px; }
 .site-footer { border-top: 1px solid var(--line); padding: 24px; color: var(--muted); }
 .site-footer a { margin-right: 12px; }
