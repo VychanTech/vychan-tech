@@ -1,0 +1,127 @@
+{
+  "schema_version": "vai-public-marketplace-feed-v1",
+  "created_at": "2026-06-30T06:39:50+00:00",
+  "publisher": "VychanTech",
+  "site_url": "https://vychan.tech",
+  "support_email": "support@vychan.tech",
+  "download_url": "https://github.com/VychanTech/VychanAI-Studio-Releases/releases/download/v0.1.0-alpha.16/VychanAI-Studio.zip",
+  "download_checksum_url": "https://github.com/VychanTech/VychanAI-Studio-Releases/releases/download/v0.1.0-alpha.16/VychanAI-Studio.zip.sha256.txt",
+  "account_url": "https://vychan.tech/account",
+  "billing_portal_url": "https://vychan.tech/support",
+  "customer_portal_url": "https://vychan.tech/support",
+  "products": [
+    {
+      "sku": "VAI-EARLY-FOUNDER-LIFETIME",
+      "display_name": "VAI Studio Early Founder Lifetime",
+      "tier": "early_founder",
+      "price_usd": 5,
+      "license_type": "lifetime",
+      "summary": "Early supporter access, Founder templates, updates, and founder status for your VAI Studio activation.",
+      "entitlements": {
+        "template_ids": [],
+        "access_tiers": [
+          "paid"
+        ]
+      },
+      "includes": [
+        "Basic templates",
+        "Unlocks Founder templates",
+        "Founder template updates",
+        "Founder status in VAI Studio"
+      ],
+      "checkout_url": "https://www.paypal.com/ncp/payment/UJJ6KNZS9ZVRQ",
+      "checkout_ready": true,
+      "fallback_url": "https://vychan.tech/pricing#vai-early-founder-lifetime",
+      "success_url": "https://vychan.tech/success",
+      "account_url": "https://vychan.tech/account"
+    },
+    {
+      "sku": "VAI-PREMIUM-LIFETIME",
+      "display_name": "VAI Studio Premium Lifetime",
+      "tier": "premium",
+      "price_usd": 20,
+      "license_type": "lifetime",
+      "summary": "Lifetime Premium access for advanced Streamer.bot templates and premium public updates.",
+      "entitlements": {
+        "template_ids": [],
+        "access_tiers": [
+          "paid",
+          "premium"
+        ]
+      },
+      "includes": [
+        "Basic templates",
+        "Unlocks Founder templates",
+        "Unlocks Premium templates",
+        "Premium template updates"
+      ],
+      "checkout_url": "https://www.paypal.com/ncp/payment/34AGY4U3ELS8S",
+      "checkout_ready": true,
+      "fallback_url": "https://vychan.tech/pricing#vai-premium-lifetime",
+      "success_url": "https://vychan.tech/success",
+      "account_url": "https://vychan.tech/account"
+    }
+  ],
+  "templates": [
+    {
+      "template_id": "starter_chat_rpg",
+      "display_name": "Chat Adventure Starter",
+      "tier": "free",
+      "access_tier": "basic",
+      "version": "0.3.0",
+      "price_usd": 0,
+      "category": "chat-game",
+      "summary": "A beginner-friendly Twitch chat adventure starter for Streamer.bot.",
+      "marketplace_url": "https://vychan.tech/pricing#starter-chat-rpg"
+    },
+    {
+      "template_id": "chaos_wheel",
+      "display_name": "Chaos Wheel Starter",
+      "tier": "free",
+      "access_tier": "basic",
+      "version": "0.2.0",
+      "price_usd": 0,
+      "category": "stream-reactions",
+      "summary": "A safe random chat-event wheel with an optional reward idea.",
+      "marketplace_url": "https://vychan.tech/pricing#chaos-wheel"
+    },
+    {
+      "template_id": "stream_pet",
+      "display_name": "Community Pet Starter",
+      "tier": "free",
+      "access_tier": "basic",
+      "version": "0.2.0",
+      "price_usd": 0,
+      "category": "community-progression",
+      "summary": "A cozy starter pet progression game with care commands and milestone rewards.",
+      "marketplace_url": "https://vychan.tech/pricing#stream-pet"
+    },
+    {
+      "template_id": "raid_boss",
+      "display_name": "Raid Boss Battle",
+      "tier": "paid",
+      "access_tier": "paid",
+      "version": "0.1.0",
+      "price_usd": 5,
+      "category": "event-game",
+      "summary": "A community boss-fight event template with attacks, heals, MVPs, and manual reward buffs.",
+      "marketplace_url": "https://vychan.tech/pricing#raid-boss"
+    },
+    {
+      "template_id": "show_control_overlay",
+      "display_name": "Show Control Overlay",
+      "tier": "premium",
+      "access_tier": "premium",
+      "version": "0.1.0",
+      "price_usd": 20,
+      "category": "show-control",
+      "summary": "A guarded advanced template for chat-reviewed show moments, OBS cues, audio/TTS hooks, and optional local API control.",
+      "marketplace_url": "https://vychan.tech/pricing#show-control-overlay"
+    }
+  ],
+  "security_notes": [
+    "Do not put payment provider secret keys, webhook secrets, license signing keys, or Twitch tokens into static site code.",
+    "VAI Studio customers activate Premium with a signed license receipt after purchase.",
+    "Twitch connection remains user-managed inside Streamer.bot."
+  ]
+}
