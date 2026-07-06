@@ -10,19 +10,36 @@
   <meta property="og:description" content="VAI Studio purchase success instructions.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vychan.tech/vai-studio/success/">
-  <link rel="stylesheet" href="/assets/vai-site.css">
+  <link rel="stylesheet" href="/assets/vai-site.css?v=20260706-nav">
 </head>
 <body>
   <header class="site-header">
     <a class="brand" href="/" aria-label="VychanTech home"><span class="brand-mark">VT</span><span>VychanTech</span></a>
-    <nav aria-label="Primary navigation">
-        <a href="/">Home</a>
-        <a href="/vai-studio/">VAI Studio</a>
-        <a href="/vai-studio/marketplace/">Templates</a>
-        <a href="/vai-studio/pricing/">Pricing</a>
-        <a href="/vai-studio/support/">Support</a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="/">Home</a>
+      <a href="/products/">Products</a>
+      <a href="/vai-studio/">VAI Studio</a>
+      <a href="/vai-studio/marketplace/">Templates</a>
+      <a href="/vai-studio/pricing/">Pricing</a>
+      <a href="/vai-studio/support/">Support</a>
     </nav>
-    <a class="header-cta" href="/vai-studio/download/">Download</a>
+    <div class="header-actions" aria-label="Account and download actions">
+      <a class="header-link" href="/vai-studio/account/">Sign in</a>
+      <a class="header-cta" href="/vai-studio/download/">Download</a>
+      <details class="mobile-menu">
+        <summary aria-label="Open navigation menu"><span></span><span></span><span></span></summary>
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+          <a href="/">Home</a>
+          <a href="/products/">Products</a>
+          <a href="/vai-studio/">VAI Studio</a>
+          <a href="/vai-studio/marketplace/">Templates</a>
+          <a href="/vai-studio/pricing/">Pricing</a>
+          <a href="/vai-studio/account/">Sign in</a>
+          <a href="/vai-studio/download/">Download</a>
+          <a href="/vai-studio/support/">Support</a>
+        </nav>
+      </details>
+    </div>
   </header>
   <main>
     <section class="page">
@@ -30,16 +47,19 @@
       <h1>Your VAI Studio purchase was received.</h1>
       <p class="lede">Open VAI Studio, choose Link Account, and sign in with the same email used for purchase. VAI Studio will unlock automatically when your membership receipt is ready.</p>
       <p>If your membership does not appear within 24 hours, email support@vychan.tech with your purchase email and PayPal transaction ID.</p>
-      <a class="button" href="/vai-studio/download/">Download VAI Studio</a>
+      <div class="actions">
+        <a class="button" href="/vai-studio/account/">Open account</a>
+        <a class="button secondary" href="/vai-studio/download/">Download VAI Studio</a>
+      </div>
     </section>
 
   </main>
   <footer class="site-footer">
     <div>
       <strong>VychanTech</strong>
-      <p>VAI Studio does not store Twitch passwords, payment provider secrets, or Streamer.bot account credentials.</p>
+      <p>Never send Twitch passwords, payment provider secrets, or Streamer.bot account credentials to VychanTech support.</p>
     </div>
-    <p><a href="/vai-studio/">VAI Studio</a> <a href="/vai-studio/marketplace/">Templates</a> <a href="/vai-studio/pricing/">Pricing</a> <a href="/vai-studio/account/">Account</a> <a href="/vai-studio/support/">Support and refunds</a></p>
+    <p><a href="/products/">Products</a> <a href="/vai-studio/">VAI Studio</a> <a href="/vai-studio/marketplace/">Templates</a> <a href="/vai-studio/pricing/">Pricing</a> <a href="/vai-studio/account/">Account</a> <a href="/vai-studio/support/">Support</a></p>
   </footer>
 </body>
 </html>

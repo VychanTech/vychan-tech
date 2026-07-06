@@ -10,19 +10,36 @@
   <meta property="og:description" content="VAI Studio helps streamers build Streamer.bot projects without code.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vychan.tech/vai-studio/">
-  <link rel="stylesheet" href="/assets/vai-site.css">
+  <link rel="stylesheet" href="/assets/vai-site.css?v=20260706-nav">
 </head>
 <body>
   <header class="site-header">
     <a class="brand" href="/" aria-label="VychanTech home"><span class="brand-mark">VT</span><span>VychanTech</span></a>
-    <nav aria-label="Primary navigation">
-        <a href="/">Home</a>
-        <a href="/vai-studio/" aria-current="page">VAI Studio</a>
-        <a href="/vai-studio/marketplace/">Templates</a>
-        <a href="/vai-studio/pricing/">Pricing</a>
-        <a href="/vai-studio/support/">Support</a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="/">Home</a>
+      <a href="/products/">Products</a>
+      <a href="/vai-studio/" aria-current="page">VAI Studio</a>
+      <a href="/vai-studio/marketplace/">Templates</a>
+      <a href="/vai-studio/pricing/">Pricing</a>
+      <a href="/vai-studio/support/">Support</a>
     </nav>
-    <a class="header-cta" href="/vai-studio/download/">Download</a>
+    <div class="header-actions" aria-label="Account and download actions">
+      <a class="header-link" href="/vai-studio/account/">Sign in</a>
+      <a class="header-cta" href="/vai-studio/download/">Download</a>
+      <details class="mobile-menu">
+        <summary aria-label="Open navigation menu"><span></span><span></span><span></span></summary>
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+          <a href="/">Home</a>
+          <a href="/products/">Products</a>
+          <a href="/vai-studio/" aria-current="page">VAI Studio</a>
+          <a href="/vai-studio/marketplace/">Templates</a>
+          <a href="/vai-studio/pricing/">Pricing</a>
+          <a href="/vai-studio/account/">Sign in</a>
+          <a href="/vai-studio/download/">Download</a>
+          <a href="/vai-studio/support/">Support</a>
+        </nav>
+      </details>
+    </div>
   </header>
   <main>
     <section class="hero product-hero">
@@ -48,13 +65,13 @@
     </section>
     <section class="band">
       <div class="section-heading">
-        <p class="eyebrow">What ships today</p>
-        <h2>A focused builder, not a personal-data bundle</h2>
+        <p class="eyebrow">What it does</p>
+        <h2>A focused builder for Streamer.bot projects</h2>
       </div>
       <div class="grid three">
-        <article><h3>Starter templates</h3><p>Free chat-game and interaction templates for learning the builder and testing Streamer.bot import flow.</p></article>
-        <article><h3>Paid unlocks</h3><p>Founder and Premium purchases unlock template tiers with signed local license receipts.</p></article>
-        <article><h3>Release boundary</h3><p>Customer downloads are product-allowlisted and exclude private training data, local logs, screenshots, and personal VychanAI tooling.</p></article>
+        <article class="card"><h3>Starter templates</h3><p>Free chat-game and interaction templates for learning the builder and testing Streamer.bot import flow.</p></article>
+        <article class="card"><h3>Paid unlocks</h3><p>Founder and Premium purchases unlock higher-value template tiers from your VychanTech account.</p></article>
+        <article class="card"><h3>Guided verification</h3><p>Setup guidance helps creators confirm imports and actions before relying on a template during a live stream.</p></article>
       </div>
     </section>
 
@@ -62,9 +79,9 @@
   <footer class="site-footer">
     <div>
       <strong>VychanTech</strong>
-      <p>VAI Studio does not store Twitch passwords, payment provider secrets, or Streamer.bot account credentials.</p>
+      <p>Never send Twitch passwords, payment provider secrets, or Streamer.bot account credentials to VychanTech support.</p>
     </div>
-    <p><a href="/vai-studio/">VAI Studio</a> <a href="/vai-studio/marketplace/">Templates</a> <a href="/vai-studio/pricing/">Pricing</a> <a href="/vai-studio/account/">Account</a> <a href="/vai-studio/support/">Support and refunds</a></p>
+    <p><a href="/products/">Products</a> <a href="/vai-studio/">VAI Studio</a> <a href="/vai-studio/marketplace/">Templates</a> <a href="/vai-studio/pricing/">Pricing</a> <a href="/vai-studio/account/">Account</a> <a href="/vai-studio/support/">Support</a></p>
   </footer>
 </body>
 </html>

@@ -20,11 +20,11 @@
   "products": [
     {
       "sku": "VAI-EARLY-FOUNDER-LIFETIME",
-      "display_name": "VAI Studio Early Founder Lifetime",
+      "display_name": "VAI Studio Early Founder",
       "tier": "early_founder",
       "price_usd": 5,
       "license_type": "lifetime",
-      "summary": "Early supporter access, Founder templates, updates, and founder status for your VAI Studio activation.",
+      "summary": "Founder-tier local template access, public tier updates, and founder status for this VAI Studio activation.",
       "entitlements": {
         "template_ids": [],
         "access_tiers": [
@@ -45,11 +45,11 @@
     },
     {
       "sku": "VAI-PREMIUM-LIFETIME",
-      "display_name": "VAI Studio Premium Lifetime",
+      "display_name": "VAI Studio Premium",
       "tier": "premium",
       "price_usd": 20,
       "license_type": "lifetime",
-      "summary": "Lifetime Premium access for advanced Streamer.bot templates and premium public updates.",
+      "summary": "Premium-tier local template access for advanced Streamer.bot templates and public premium tier updates.",
       "entitlements": {
         "template_ids": [],
         "access_tiers": [
@@ -127,9 +127,8 @@
       "marketplace_url": "https://vychan.tech/vai-studio/marketplace/#show-control-overlay"
     }
   ],
-  "security_notes": [
-    "Do not put payment provider secret keys, webhook secrets, license signing keys, or Twitch tokens into static site code.",
-    "VAI Studio customers link their VychanTech account after purchase; signed receipt import remains a support fallback.",
+  "customer_notes": [
+    "VAI Studio purchases link to your VychanTech account; signed receipt import remains a support fallback.",
     "Twitch and Streamer.bot connections remain user-managed."
   ]
 }

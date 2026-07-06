@@ -10,26 +10,44 @@
   <meta property="og:description" content="Get help with VAI Studio.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vychan.tech/vai-studio/support/">
-  <link rel="stylesheet" href="/assets/vai-site.css">
+  <link rel="stylesheet" href="/assets/vai-site.css?v=20260706-nav">
 </head>
 <body>
   <header class="site-header">
     <a class="brand" href="/" aria-label="VychanTech home"><span class="brand-mark">VT</span><span>VychanTech</span></a>
-    <nav aria-label="Primary navigation">
-        <a href="/">Home</a>
-        <a href="/vai-studio/">VAI Studio</a>
-        <a href="/vai-studio/marketplace/">Templates</a>
-        <a href="/vai-studio/pricing/">Pricing</a>
-        <a href="/vai-studio/support/" aria-current="page">Support</a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="/">Home</a>
+      <a href="/products/">Products</a>
+      <a href="/vai-studio/">VAI Studio</a>
+      <a href="/vai-studio/marketplace/">Templates</a>
+      <a href="/vai-studio/pricing/">Pricing</a>
+      <a href="/vai-studio/support/" aria-current="page">Support</a>
     </nav>
-    <a class="header-cta" href="/vai-studio/download/">Download</a>
+    <div class="header-actions" aria-label="Account and download actions">
+      <a class="header-link" href="/vai-studio/account/">Sign in</a>
+      <a class="header-cta" href="/vai-studio/download/">Download</a>
+      <details class="mobile-menu">
+        <summary aria-label="Open navigation menu"><span></span><span></span><span></span></summary>
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+          <a href="/">Home</a>
+          <a href="/products/">Products</a>
+          <a href="/vai-studio/">VAI Studio</a>
+          <a href="/vai-studio/marketplace/">Templates</a>
+          <a href="/vai-studio/pricing/">Pricing</a>
+          <a href="/vai-studio/account/">Sign in</a>
+          <a href="/vai-studio/download/">Download</a>
+          <a href="/vai-studio/support/" aria-current="page">Support</a>
+        </nav>
+      </details>
+    </div>
   </header>
   <main>
     <section class="page">
       <p class="eyebrow">Support</p>
       <h1>Get help with VAI Studio</h1>
       <p class="lede">Email support@vychan.tech. Include your VAI Studio version, Windows version, Streamer.bot version, selected template, and the step that failed.</p>
-      <div class="grid two">
+      <div class="grid three">
+        <article class="card"><h2>Account sign-in</h2><p>Use the account page to link VAI Studio, confirm your current membership, or start checkout from the right email.</p><a class="inline-link" href="/vai-studio/account/">Open account</a></article>
         <article class="card"><h2>Security boundary</h2><p>Do not send Twitch passwords, payment provider keys, OAuth tokens, or Streamer.bot account database files.</p></article>
         <article class="card"><h2>Refund help</h2><p>For early access, email support within 14 days with your purchase email, PayPal transaction ID, SKU, and issue. We can help with install or activation first, then process eligible refund requests through the hosted payment provider. Refunded licenses may be deactivated for future support and updates.</p></article>
       </div>
@@ -39,9 +57,9 @@
   <footer class="site-footer">
     <div>
       <strong>VychanTech</strong>
-      <p>VAI Studio does not store Twitch passwords, payment provider secrets, or Streamer.bot account credentials.</p>
+      <p>Never send Twitch passwords, payment provider secrets, or Streamer.bot account credentials to VychanTech support.</p>
     </div>
-    <p><a href="/vai-studio/">VAI Studio</a> <a href="/vai-studio/marketplace/">Templates</a> <a href="/vai-studio/pricing/">Pricing</a> <a href="/vai-studio/account/">Account</a> <a href="/vai-studio/support/">Support and refunds</a></p>
+    <p><a href="/products/">Products</a> <a href="/vai-studio/">VAI Studio</a> <a href="/vai-studio/marketplace/">Templates</a> <a href="/vai-studio/pricing/">Pricing</a> <a href="/vai-studio/account/">Account</a> <a href="/vai-studio/support/">Support</a></p>
   </footer>
 </body>
 </html>

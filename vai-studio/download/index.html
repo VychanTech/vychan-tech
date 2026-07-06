@@ -10,26 +10,43 @@
   <meta property="og:description" content="Download VAI Studio for Windows.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vychan.tech/vai-studio/download/">
-  <link rel="stylesheet" href="/assets/vai-site.css">
+  <link rel="stylesheet" href="/assets/vai-site.css?v=20260706-nav">
 </head>
 <body>
   <header class="site-header">
     <a class="brand" href="/" aria-label="VychanTech home"><span class="brand-mark">VT</span><span>VychanTech</span></a>
-    <nav aria-label="Primary navigation">
-        <a href="/">Home</a>
-        <a href="/vai-studio/">VAI Studio</a>
-        <a href="/vai-studio/marketplace/">Templates</a>
-        <a href="/vai-studio/pricing/">Pricing</a>
-        <a href="/vai-studio/support/">Support</a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="/">Home</a>
+      <a href="/products/">Products</a>
+      <a href="/vai-studio/">VAI Studio</a>
+      <a href="/vai-studio/marketplace/">Templates</a>
+      <a href="/vai-studio/pricing/">Pricing</a>
+      <a href="/vai-studio/support/">Support</a>
     </nav>
-    <a class="header-cta" href="/vai-studio/download/">Download</a>
+    <div class="header-actions" aria-label="Account and download actions">
+      <a class="header-link" href="/vai-studio/account/">Sign in</a>
+      <a class="header-cta" href="/vai-studio/download/" aria-current="page">Download</a>
+      <details class="mobile-menu">
+        <summary aria-label="Open navigation menu"><span></span><span></span><span></span></summary>
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+          <a href="/">Home</a>
+          <a href="/products/">Products</a>
+          <a href="/vai-studio/">VAI Studio</a>
+          <a href="/vai-studio/marketplace/">Templates</a>
+          <a href="/vai-studio/pricing/">Pricing</a>
+          <a href="/vai-studio/account/">Sign in</a>
+          <a href="/vai-studio/download/" aria-current="page">Download</a>
+          <a href="/vai-studio/support/">Support</a>
+        </nav>
+      </details>
+    </div>
   </header>
   <main>
     <section class="page">
-      <p class="eyebrow">Windows alpha</p>
+      <p class="eyebrow">Windows download</p>
       <h1>Download VAI Studio</h1>
-      <p class="lede">Install the current Windows alpha, then use the built-in setup flow to create your first Streamer.bot project.</p>
-      <p class="notice">Current release: v0.1.0-alpha.16. This early Windows build is not publicly code-signed yet, so SmartScreen may warn. Download only from the official VychanTech GitHub release, and use the checksum link when you want to verify it. Python is not required for the normal packaged install.</p>
+      <p class="lede">Install the current Windows build, then use the built-in setup flow to create your first Streamer.bot project.</p>
+      <p class="notice">Current release: v0.1.0-alpha.16. This Windows build is not publicly code-signed yet, so SmartScreen may warn. Download only from the official VychanTech GitHub release, and use the checksum link when you want to verify it. Python is not required for the normal packaged install.</p>
       <a class="button" href="https://github.com/VychanTech/VychanAI-Studio-Releases/releases/download/v0.1.0-alpha.16/VychanAI-Studio.zip">Download VAI Studio</a>
       <p class="small"><a href="https://github.com/VychanTech/VychanAI-Studio-Releases/releases/download/v0.1.0-alpha.16/VychanAI-Studio.zip.sha256.txt">SHA-256 checksum</a> - optional, recommended for verifying the download.</p>
       <ol class="steps">
@@ -40,15 +57,16 @@
         <li>Double-click <code>Install VAI Studio.cmd</code>.</li>
         <li>Open VAI Studio from the Windows Start Menu folder.</li>
       </ol>
+      <p class="small">Already purchased Founder or Premium? <a href="/vai-studio/account/">Sign in to link VAI Studio and confirm access.</a></p>
     </section>
 
   </main>
   <footer class="site-footer">
     <div>
       <strong>VychanTech</strong>
-      <p>VAI Studio does not store Twitch passwords, payment provider secrets, or Streamer.bot account credentials.</p>
+      <p>Never send Twitch passwords, payment provider secrets, or Streamer.bot account credentials to VychanTech support.</p>
     </div>
-    <p><a href="/vai-studio/">VAI Studio</a> <a href="/vai-studio/marketplace/">Templates</a> <a href="/vai-studio/pricing/">Pricing</a> <a href="/vai-studio/account/">Account</a> <a href="/vai-studio/support/">Support and refunds</a></p>
+    <p><a href="/products/">Products</a> <a href="/vai-studio/">VAI Studio</a> <a href="/vai-studio/marketplace/">Templates</a> <a href="/vai-studio/pricing/">Pricing</a> <a href="/vai-studio/account/">Account</a> <a href="/vai-studio/support/">Support</a></p>
   </footer>
 </body>
 </html>

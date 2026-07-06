@@ -3,40 +3,62 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Account | VychanTech</title>
-  <meta name="description" content="Manage VAI Studio billing and activation.">
+  <title>Account and Sign In | VychanTech</title>
+  <meta name="description" content="Sign in to manage VAI Studio billing, activation, and membership access.">
   <link rel="canonical" href="https://vychan.tech/vai-studio/account/">
-  <meta property="og:title" content="Account | VychanTech">
-  <meta property="og:description" content="Manage VAI Studio billing and activation.">
+  <meta property="og:title" content="Account and Sign In | VychanTech">
+  <meta property="og:description" content="Sign in to manage VAI Studio billing, activation, and membership access.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vychan.tech/vai-studio/account/">
-  <link rel="stylesheet" href="/assets/vai-site.css">
+  <link rel="stylesheet" href="/assets/vai-site.css?v=20260706-nav">
 </head>
 <body>
   <header class="site-header">
     <a class="brand" href="/" aria-label="VychanTech home"><span class="brand-mark">VT</span><span>VychanTech</span></a>
-    <nav aria-label="Primary navigation">
-        <a href="/">Home</a>
-        <a href="/vai-studio/">VAI Studio</a>
-        <a href="/vai-studio/marketplace/">Templates</a>
-        <a href="/vai-studio/pricing/">Pricing</a>
-        <a href="/vai-studio/support/">Support</a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="/">Home</a>
+      <a href="/products/">Products</a>
+      <a href="/vai-studio/">VAI Studio</a>
+      <a href="/vai-studio/marketplace/">Templates</a>
+      <a href="/vai-studio/pricing/">Pricing</a>
+      <a href="/vai-studio/support/">Support</a>
     </nav>
-    <a class="header-cta" href="/vai-studio/download/">Download</a>
+    <div class="header-actions" aria-label="Account and download actions">
+      <a class="header-link" href="/vai-studio/account/" aria-current="page">Sign in</a>
+      <a class="header-cta" href="/vai-studio/download/">Download</a>
+      <details class="mobile-menu">
+        <summary aria-label="Open navigation menu"><span></span><span></span><span></span></summary>
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+          <a href="/">Home</a>
+          <a href="/products/">Products</a>
+          <a href="/vai-studio/">VAI Studio</a>
+          <a href="/vai-studio/marketplace/">Templates</a>
+          <a href="/vai-studio/pricing/">Pricing</a>
+          <a href="/vai-studio/account/" aria-current="page">Sign in</a>
+          <a href="/vai-studio/download/">Download</a>
+          <a href="/vai-studio/support/">Support</a>
+        </nav>
+      </details>
+    </div>
   </header>
   <main>
     <section class="page">
       <p class="eyebrow">Account and activation</p>
-      <h1>Manage your VAI Studio account</h1>
-      <p class="lede">Link VAI Studio to your VychanTech account, check your current membership, and confirm Founder or Premium access after purchase.</p>
-      <div class="actions">
+      <h1>Sign in and manage VAI Studio</h1>
+      <p class="lede">Use your VychanTech account to link VAI Studio, review membership access, and keep Founder or Premium purchases attached to the right email.</p>
+      <div class="signin-path" aria-label="How VAI Studio account access works">
+        <div class="signin-step"><strong>1. Sign in here</strong><span>Use the email you used at checkout, or the email you want tied to future purchases.</span></div>
+        <div class="signin-step"><strong>2. Link VAI Studio</strong><span>Open the app, choose Link Account, and enter the code shown there.</span></div>
+        <div class="signin-step"><strong>3. Confirm access</strong><span>Your membership and paid templates appear after the account link is complete.</span></div>
+      </div>
+      <div class="actions account-actions">
         <button class="button" id="refresh-account" type="button">Refresh Account</button>
         <a class="button secondary" href="/vai-studio/pricing/">Upgrade</a>
       </div>
       <div class="grid two">
         <article class="card account-card">
           <h2>Link this device</h2>
-          <p class="small">Open VAI Studio, choose Link Account, then confirm the code shown there.</p>
+          <p class="small">Open VAI Studio, choose Link Account, then enter the code shown in the app.</p>
           <form id="link-form" class="account-form">
             <label for="link-code">VAI Studio code</label>
             <div class="inline-form">
@@ -48,16 +70,16 @@
         </article>
         <article class="card account-card">
           <h2>Membership</h2>
-          <p class="small" id="account-email">Checking account status...</p>
+          <p class="small" id="account-email">Checking sign-in status...</p>
           <div class="membership-panel">
             <span class="pill" id="membership-tier">Free</span>
             <div id="entitlement-list" class="entitlement-list">No paid entitlements loaded yet.</div>
           </div>
-          <p class="status-line" id="account-status" role="status">Account data loads from the VychanTech membership API.</p>
+          <p class="status-line" id="account-status" role="status">Sign in to view your current VAI Studio membership.</p>
         </article>
         <article class="card account-card">
           <h2>Upgrade access</h2>
-          <p class="small">Paid checkout starts from this signed-in account so PayPal purchases can attach to your VAI Studio membership automatically.</p>
+          <p class="small">Start checkout from the account you want attached to your VAI Studio membership.</p>
           <div class="checkout-options">
             <button class="button" type="button" data-checkout-sku="VAI-EARLY-FOUNDER-LIFETIME">Buy Founder $5</button>
             <button class="button secondary" type="button" data-checkout-sku="VAI-PREMIUM-LIFETIME">Buy Premium $20</button>
@@ -73,9 +95,9 @@
   <footer class="site-footer">
     <div>
       <strong>VychanTech</strong>
-      <p>VAI Studio does not store Twitch passwords, payment provider secrets, or Streamer.bot account credentials.</p>
+      <p>Never send Twitch passwords, payment provider secrets, or Streamer.bot account credentials to VychanTech support.</p>
     </div>
-    <p><a href="/vai-studio/">VAI Studio</a> <a href="/vai-studio/marketplace/">Templates</a> <a href="/vai-studio/pricing/">Pricing</a> <a href="/vai-studio/account/">Account</a> <a href="/vai-studio/support/">Support and refunds</a></p>
+    <p><a href="/products/">Products</a> <a href="/vai-studio/">VAI Studio</a> <a href="/vai-studio/marketplace/">Templates</a> <a href="/vai-studio/pricing/">Pricing</a> <a href="/vai-studio/account/">Account</a> <a href="/vai-studio/support/">Support</a></p>
   </footer>
   <script>
     const linkInput = document.getElementById("link-code");
@@ -129,7 +151,7 @@
     handleCheckoutReturn().then(loadAccount);
 
     async function loadAccount() {
-      setStatus(accountStatus, "Loading account...", "pending");
+      setStatus(accountStatus, "Checking your account...", "pending");
       try {
         const data = await requestJson("/api/account/me");
         const account = data.account || {};
@@ -140,16 +162,16 @@
         updateCheckoutButtons(account.tier || "free");
         setStatus(accountStatus, "Account status is current.", "ok");
       } catch (error) {
-        accountEmail.textContent = "Sign in through the protected VychanTech account page.";
+        accountEmail.textContent = "Sign in to your VychanTech account to continue.";
         membershipTier.textContent = "Unavailable";
-        entitlementList.textContent = "Membership API is not available in this browser session.";
+        entitlementList.textContent = "Sign in to view membership details for this browser session.";
         checkoutHistory.textContent = "Sign in to start or review checkout.";
         setStatus(accountStatus, error.message, "warn");
       }
     }
 
     async function startCheckout(sku) {
-      setStatus(checkoutStatus, "Creating secure PayPal checkout...", "pending");
+      setStatus(checkoutStatus, "Creating PayPal checkout...", "pending");
       try {
         const data = await requestJson("/api/account/checkout/paypal/create", {
           method: "POST",
@@ -201,7 +223,7 @@
       try {
         payload = text ? JSON.parse(text) : {};
       } catch {
-        throw new Error("Account service is not returning JSON yet. Try again after deployment, or contact support.");
+        throw new Error("We could not load account details. Try again, or contact support if this continues.");
       }
       if (!response.ok) {
         throw new Error(payload.message || payload.error || `Account request failed with HTTP ${response.status}.`);
