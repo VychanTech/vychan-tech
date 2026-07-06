@@ -83,6 +83,8 @@ code { background: #111116; border: 1px solid var(--line-soft); border-radius: 5
 .inline-form input:focus { outline: 2px solid var(--purple); outline-offset: 2px; }
 .membership-panel { display: grid; gap: 12px; align-items: start; margin-top: 14px; }
 .entitlement-list { color: var(--muted); line-height: 1.5; }
+.checkout-options { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0; }
+.checkout-history { color: var(--muted); line-height: 1.5; margin: 12px 0; }
 .entitlement-row { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line-soft); color: var(--ink); }
 .entitlement-row small { color: var(--muted); overflow-wrap: anywhere; text-align: right; }
 .status-line { color: var(--muted); line-height: 1.5; }

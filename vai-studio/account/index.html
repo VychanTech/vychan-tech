@@ -55,6 +55,16 @@
           </div>
           <p class="status-line" id="account-status" role="status">Account data loads from the VychanTech membership API.</p>
         </article>
+        <article class="card account-card">
+          <h2>Upgrade access</h2>
+          <p class="small">Paid checkout starts from this signed-in account so PayPal purchases can attach to your VAI Studio membership automatically.</p>
+          <div class="checkout-options">
+            <button class="button" type="button" data-checkout-sku="VAI-EARLY-FOUNDER-LIFETIME">Buy Founder $5</button>
+            <button class="button secondary" type="button" data-checkout-sku="VAI-PREMIUM-LIFETIME">Buy Premium $20</button>
+          </div>
+          <div id="checkout-history" class="checkout-history">No recent checkout sessions loaded yet.</div>
+          <p class="status-line" id="checkout-status" role="status">Choose a paid tier after signing in.</p>
+        </article>
       </div>
       <p class="notice">During early access, receipt import remains available as a support fallback. Email support@vychan.tech with your purchase email, PayPal transaction ID, SKU, and VAI Studio version if your membership does not appear.</p>
     </section>
@@ -74,13 +84,21 @@
     const accountEmail = document.getElementById("account-email");
     const membershipTier = document.getElementById("membership-tier");
     const entitlementList = document.getElementById("entitlement-list");
+    const checkoutStatus = document.getElementById("checkout-status");
+    const checkoutHistory = document.getElementById("checkout-history");
     const refreshButton = document.getElementById("refresh-account");
     const params = new URLSearchParams(window.location.search);
     const incomingCode = params.get("link") || "";
+    const incomingSku = params.get("sku") || "";
+    const checkoutState = params.get("checkout") || "";
+    const checkoutSession = params.get("session") || params.get("checkout_session_id") || "";
 
     if (incomingCode) {
       linkInput.value = incomingCode.toUpperCase();
       setStatus(linkStatus, "Ready to confirm this VAI Studio link code.", "ok");
+    }
+    if (incomingSku) {
+      setStatus(checkoutStatus, "Signed in. Choose the matching upgrade below to continue to PayPal.", "pending");
     }
 
     document.getElementById("link-form").addEventListener("submit", async (event) => {
@@ -103,8 +121,12 @@
       }
     });
 
+    document.querySelectorAll("[data-checkout-sku]").forEach((button) => {
+      button.addEventListener("click", () => startCheckout(button.dataset.checkoutSku));
+    });
+
     refreshButton.addEventListener("click", loadAccount);
-    loadAccount();
+    handleCheckoutReturn().then(loadAccount);
 
     async function loadAccount() {
       setStatus(accountStatus, "Loading account...", "pending");
@@ -114,12 +136,53 @@
         accountEmail.textContent = account.email ? `Signed in as ${account.email}` : "Signed in";
         membershipTier.textContent = titleCase(account.tier || "free");
         renderEntitlements(data.entitlements || []);
+        renderCheckouts(data.checkouts || []);
+        updateCheckoutButtons(account.tier || "free");
         setStatus(accountStatus, "Account status is current.", "ok");
       } catch (error) {
         accountEmail.textContent = "Sign in through the protected VychanTech account page.";
         membershipTier.textContent = "Unavailable";
         entitlementList.textContent = "Membership API is not available in this browser session.";
+        checkoutHistory.textContent = "Sign in to start or review checkout.";
         setStatus(accountStatus, error.message, "warn");
+      }
+    }
+
+    async function startCheckout(sku) {
+      setStatus(checkoutStatus, "Creating secure PayPal checkout...", "pending");
+      try {
+        const data = await requestJson("/api/account/checkout/paypal/create", {
+          method: "POST",
+          body: JSON.stringify({ sku }),
+        });
+        const approveUrl = data.approve_url || (data.checkout && data.checkout.approval_url);
+        if (!approveUrl) {
+          throw new Error("PayPal approval link was not returned. Contact support if this repeats.");
+        }
+        window.location.href = approveUrl;
+      } catch (error) {
+        setStatus(checkoutStatus, error.message, "warn");
+      }
+    }
+
+    async function handleCheckoutReturn() {
+      if (checkoutState === "cancelled") {
+        setStatus(checkoutStatus, "Checkout was cancelled. No account changes were made.", "warn");
+        return;
+      }
+      if (checkoutState !== "success" || !checkoutSession) {
+        return;
+      }
+      setStatus(checkoutStatus, "Confirming PayPal payment...", "pending");
+      try {
+        const data = await requestJson("/api/account/checkout/paypal/capture", {
+          method: "POST",
+          body: JSON.stringify({ checkout_session_id: checkoutSession }),
+        });
+        setStatus(checkoutStatus, data.message || "PayPal checkout was confirmed.", data.status === "fulfilled" ? "ok" : "pending");
+        window.history.replaceState({}, "", "/vai-studio/account/");
+      } catch (error) {
+        setStatus(checkoutStatus, error.message, "warn");
       }
     }
 
@@ -156,6 +219,32 @@
         const sku = item.sku ? ` <small>${escapeHtml(item.sku)}</small>` : "";
         return `<div class="entitlement-row"><strong>${escapeHtml(titleCase(name))}</strong>${sku}</div>`;
       }).join("");
+    }
+
+    function renderCheckouts(checkouts) {
+      if (!checkouts.length) {
+        checkoutHistory.textContent = "No recent checkout sessions yet.";
+        return;
+      }
+      checkoutHistory.innerHTML = checkouts.map((item) => {
+        const status = titleCase(item.status || "created");
+        const sku = item.sku || "VAI Studio";
+        const paid = item.amount_usd ? `$${Number(item.amount_usd).toFixed(0)}` : "";
+        return `<div class="entitlement-row"><strong>${escapeHtml(status)}</strong><small>${escapeHtml(sku)} ${escapeHtml(paid)}</small></div>`;
+      }).join("");
+    }
+
+    function updateCheckoutButtons(tier) {
+      const normalized = String(tier || "free").toLowerCase();
+      document.querySelectorAll("[data-checkout-sku]").forEach((button) => {
+        const sku = button.dataset.checkoutSku;
+        const alreadyUnlocked = normalized === "premium" || (sku === "VAI-EARLY-FOUNDER-LIFETIME" && (normalized === "founder" || normalized === "early_founder"));
+        button.disabled = alreadyUnlocked;
+        button.classList.toggle("disabled", alreadyUnlocked);
+        if (alreadyUnlocked) {
+          button.textContent = "Already Unlocked";
+        }
+      });
     }
 
     function setStatus(element, message, tone) {
