@@ -26,14 +26,37 @@
   </header>
   <main>
     <section class="page">
-      <p class="eyebrow">Billing and activation</p>
+      <p class="eyebrow">Account and activation</p>
       <h1>Manage your VAI Studio account</h1>
-      <p class="lede">There is no VAI account login yet. Payments stay with the hosted payment provider, and Founder or Premium activation happens inside VAI Studio with a signed license receipt.</p>
-      <a class="button" href="https://vychan.tech/vai-studio/support/">Get Purchase Help</a>
-      <div class="grid two">
-        <article class="card"><h2>After purchase</h2><p>Your signed receipt may be sent manually within 24 hours during early access. Open VAI Studio, choose Activate, then import or paste it.</p></article>
-        <article class="card"><h2>Need help?</h2><p>Email support@vychan.tech with your purchase email, PayPal transaction ID, SKU, and VAI Studio version.</p></article>
+      <p class="lede">Link VAI Studio to your VychanTech account, check your current membership, and confirm Founder or Premium access after purchase.</p>
+      <div class="actions">
+        <button class="button" id="refresh-account" type="button">Refresh Account</button>
+        <a class="button secondary" href="/vai-studio/pricing/">Upgrade</a>
       </div>
+      <div class="grid two">
+        <article class="card account-card">
+          <h2>Link this device</h2>
+          <p class="small">Open VAI Studio, choose Link Account, then confirm the code shown there.</p>
+          <form id="link-form" class="account-form">
+            <label for="link-code">VAI Studio code</label>
+            <div class="inline-form">
+              <input id="link-code" name="link-code" autocomplete="one-time-code" placeholder="ABCD-2345">
+              <button class="button" type="submit">Confirm Link</button>
+            </div>
+          </form>
+          <p class="status-line" id="link-status" role="status">Waiting for a VAI Studio link code.</p>
+        </article>
+        <article class="card account-card">
+          <h2>Membership</h2>
+          <p class="small" id="account-email">Checking account status...</p>
+          <div class="membership-panel">
+            <span class="pill" id="membership-tier">Free</span>
+            <div id="entitlement-list" class="entitlement-list">No paid entitlements loaded yet.</div>
+          </div>
+          <p class="status-line" id="account-status" role="status">Account data loads from the VychanTech membership API.</p>
+        </article>
+      </div>
+      <p class="notice">During early access, receipt import remains available as a support fallback. Email support@vychan.tech with your purchase email, PayPal transaction ID, SKU, and VAI Studio version if your membership does not appear.</p>
     </section>
 
   </main>
@@ -44,5 +67,115 @@
     </div>
     <p><a href="/vai-studio/">VAI Studio</a> <a href="/vai-studio/marketplace/">Templates</a> <a href="/vai-studio/pricing/">Pricing</a> <a href="/vai-studio/account/">Account</a> <a href="/vai-studio/support/">Support and refunds</a></p>
   </footer>
+  <script>
+    const linkInput = document.getElementById("link-code");
+    const linkStatus = document.getElementById("link-status");
+    const accountStatus = document.getElementById("account-status");
+    const accountEmail = document.getElementById("account-email");
+    const membershipTier = document.getElementById("membership-tier");
+    const entitlementList = document.getElementById("entitlement-list");
+    const refreshButton = document.getElementById("refresh-account");
+    const params = new URLSearchParams(window.location.search);
+    const incomingCode = params.get("link") || "";
+
+    if (incomingCode) {
+      linkInput.value = incomingCode.toUpperCase();
+      setStatus(linkStatus, "Ready to confirm this VAI Studio link code.", "ok");
+    }
+
+    document.getElementById("link-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const code = linkInput.value.trim().toUpperCase();
+      if (!code) {
+        setStatus(linkStatus, "Enter the code shown in VAI Studio.", "warn");
+        return;
+      }
+      setStatus(linkStatus, "Confirming device link...", "pending");
+      try {
+        await requestJson("/api/studio/device/claim", {
+          method: "POST",
+          body: JSON.stringify({ user_code: code }),
+        });
+        setStatus(linkStatus, "Linked. Return to VAI Studio to finish activation.", "ok");
+        await loadAccount();
+      } catch (error) {
+        setStatus(linkStatus, error.message, "warn");
+      }
+    });
+
+    refreshButton.addEventListener("click", loadAccount);
+    loadAccount();
+
+    async function loadAccount() {
+      setStatus(accountStatus, "Loading account...", "pending");
+      try {
+        const data = await requestJson("/api/account/me");
+        const account = data.account || {};
+        accountEmail.textContent = account.email ? `Signed in as ${account.email}` : "Signed in";
+        membershipTier.textContent = titleCase(account.tier || "free");
+        renderEntitlements(data.entitlements || []);
+        setStatus(accountStatus, "Account status is current.", "ok");
+      } catch (error) {
+        accountEmail.textContent = "Sign in through the protected VychanTech account page.";
+        membershipTier.textContent = "Unavailable";
+        entitlementList.textContent = "Membership API is not available in this browser session.";
+        setStatus(accountStatus, error.message, "warn");
+      }
+    }
+
+    async function requestJson(path, options = {}) {
+      const response = await fetch(path, {
+        credentials: "include",
+        redirect: "follow",
+        headers: {
+          "Content-Type": "application/json",
+          ...(options.headers || {}),
+        },
+        ...options,
+      });
+      const text = await response.text();
+      let payload = null;
+      try {
+        payload = text ? JSON.parse(text) : {};
+      } catch {
+        throw new Error("Account service is not returning JSON yet. Try again after deployment, or contact support.");
+      }
+      if (!response.ok) {
+        throw new Error(payload.message || payload.error || `Account request failed with HTTP ${response.status}.`);
+      }
+      return payload;
+    }
+
+    function renderEntitlements(entitlements) {
+      if (!entitlements.length) {
+        entitlementList.textContent = "Free templates are available. Paid templates unlock after Founder or Premium purchase.";
+        return;
+      }
+      entitlementList.innerHTML = entitlements.map((item) => {
+        const name = item.template_id || item.access_tier || item.sku || "entitlement";
+        const sku = item.sku ? ` <small>${escapeHtml(item.sku)}</small>` : "";
+        return `<div class="entitlement-row"><strong>${escapeHtml(titleCase(name))}</strong>${sku}</div>`;
+      }).join("");
+    }
+
+    function setStatus(element, message, tone) {
+      element.textContent = message;
+      element.dataset.tone = tone;
+    }
+
+    function titleCase(value) {
+      return String(value || "").replace(/[_-]/g, " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+    }
+
+    function escapeHtml(value) {
+      return String(value || "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;",
+      }[char]));
+    }
+  </script>
 </body>
 </html>

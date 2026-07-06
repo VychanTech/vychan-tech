@@ -129,7 +129,7 @@
   ],
   "security_notes": [
     "Do not put payment provider secret keys, webhook secrets, license signing keys, or Twitch tokens into static site code.",
-    "VAI Studio customers activate Premium with a signed license receipt after purchase.",
+    "VAI Studio customers link their VychanTech account after purchase; signed receipt import remains a support fallback.",
     "Twitch and Streamer.bot connections remain user-managed."
   ]
 }
