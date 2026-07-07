@@ -1,5 +1,5 @@
 (function () {
-  const accountPath = "/account/";
+  const accountPath = "/login/";
   const downloadPath = "/vai-studio/download/";
   const supportPath = "/vai-studio/support/";
   const signOutPath = "/api/auth/logout?redirect=/";
@@ -110,7 +110,7 @@
   function updateAccountLinks(data) {
     const account = data.account || {};
     const email = account.email || "";
-    document.querySelectorAll('a[data-account-action="signin"], a[href="/account/"]').forEach((link) => {
+    document.querySelectorAll(`a[data-account-action="signin"], a[href="${accountPath}"]`).forEach((link) => {
       if (link.closest(".account-dropdown")) {
         return;
       }

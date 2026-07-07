@@ -1,6 +1,6 @@
 {
   "schema_version": "vai-public-marketplace-feed-v2",
-  "created_at": "2026-07-07T14:42:30+00:00",
+  "created_at": "2026-07-07T14:45:56+00:00",
   "publisher": "VychanTech",
   "site_url": "https://vychan.tech",
   "product_name": "VAI Studio",
@@ -12,7 +12,7 @@
   "download_checksum_url": "https://github.com/VychanTech/VychanAI-Studio-Releases/releases/download/v0.1.0-alpha.16/VychanAI-Studio.zip.sha256.txt",
   "pricing_url": "https://vychan.tech/vai-studio/pricing/",
   "marketplace_url": "https://vychan.tech/vai-studio/marketplace/",
-  "account_url": "https://vychan.tech/account/",
+  "account_url": "https://vychan.tech/login/",
   "success_url": "https://vychan.tech/vai-studio/success/",
   "support_url": "https://vychan.tech/vai-studio/support/",
   "billing_portal_url": "https://vychan.tech/vai-studio/support/",
@@ -41,7 +41,7 @@
       "checkout_ready": true,
       "fallback_url": "https://vychan.tech/vai-studio/pricing/#vai-early-founder-lifetime",
       "success_url": "https://vychan.tech/vai-studio/success/",
-      "account_url": "https://vychan.tech/account/"
+      "account_url": "https://vychan.tech/login/"
     },
     {
       "sku": "VAI-PREMIUM-LIFETIME",
@@ -67,7 +67,7 @@
       "checkout_ready": true,
       "fallback_url": "https://vychan.tech/vai-studio/pricing/#vai-premium-lifetime",
       "success_url": "https://vychan.tech/vai-studio/success/",
-      "account_url": "https://vychan.tech/account/"
+      "account_url": "https://vychan.tech/login/"
     }
   ],
   "templates": [
