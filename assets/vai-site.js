@@ -1,8 +1,8 @@
 (function () {
-  const accountPath = "/vai-studio/account/";
+  const accountPath = "/account/";
   const downloadPath = "/vai-studio/download/";
   const supportPath = "/vai-studio/support/";
-  const signOutPath = "/cdn-cgi/access/logout?redirect_url=%2F";
+  const signOutPath = "/api/auth/logout?redirect=/";
 
   function onReady(callback) {
     if (document.readyState === "loading") {
@@ -35,7 +35,7 @@
 
   async function loadAccount() {
     try {
-      const response = await fetch("/api/account/me", {
+      const response = await fetch("/api/auth/me", {
         credentials: "include",
         redirect: "manual",
         headers: { Accept: "application/json" },
@@ -55,7 +55,7 @@
     const account = data.account || {};
     const email = account.email || "VychanTech account";
     const tier = titleCase(account.tier || "free");
-    const signIn = document.querySelector('.header-actions > .header-link[href="/vai-studio/account/"]');
+    const signIn = document.querySelector('.header-actions > .header-link[data-account-action="signin"]');
     if (!signIn || document.querySelector(".header-actions > .account-menu")) {
       return;
     }
@@ -110,7 +110,7 @@
   function updateAccountLinks(data) {
     const account = data.account || {};
     const email = account.email || "";
-    document.querySelectorAll('a[href="/vai-studio/account/"]').forEach((link) => {
+    document.querySelectorAll('a[data-account-action="signin"], a[href="/account/"]').forEach((link) => {
       if (link.closest(".account-dropdown")) {
         return;
       }
@@ -146,6 +146,16 @@
       }
     });
   }
+
+  window.addEventListener("vychan-account-loaded", (event) => {
+    const data = event.detail;
+    if (!data || !data.account) {
+      return;
+    }
+    window.VychanAccount = data;
+    replaceHeaderSignIn(data);
+    updateAccountLinks(data);
+  });
 
   onReady(async () => {
     const data = await loadAccount();
