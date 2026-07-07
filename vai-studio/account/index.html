@@ -3,28 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Account and Sign In | VychanTech</title>
-  <meta name="description" content="Sign in to manage VAI Studio billing, activation, and membership access.">
+  <title>VychanTech Account | VychanTech</title>
+  <meta name="description" content="Manage VAI Studio membership, device linking, and template access from your VychanTech account.">
   <link rel="canonical" href="https://vychan.tech/vai-studio/account/">
-  <meta property="og:title" content="Account and Sign In | VychanTech">
-  <meta property="og:description" content="Sign in to manage VAI Studio billing, activation, and membership access.">
+  <meta property="og:title" content="VychanTech Account | VychanTech">
+  <meta property="og:description" content="Manage VAI Studio membership, device linking, and template access from your VychanTech account.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vychan.tech/vai-studio/account/">
-  <link rel="stylesheet" href="/assets/vai-site.css?v=20260706-nav">
+  <link rel="stylesheet" href="/assets/vai-site.css?v=20260707-account">
+  <script src="/assets/vai-site.js?v=20260707-account" defer></script>
 </head>
 <body>
   <header class="site-header">
     <a class="brand" href="/" aria-label="VychanTech home"><span class="brand-mark">VT</span><span>VychanTech</span></a>
     <nav class="desktop-nav" aria-label="Primary navigation">
-      <a href="/">Home</a>
-      <a href="/products/">Products</a>
       <a href="/vai-studio/">VAI Studio</a>
       <a href="/vai-studio/marketplace/">Templates</a>
       <a href="/vai-studio/pricing/">Pricing</a>
       <a href="/vai-studio/support/">Support</a>
     </nav>
     <div class="header-actions" aria-label="Account and download actions">
-      <a class="header-link" href="/vai-studio/account/" aria-current="page">Sign in</a>
+      <a class="header-link" href="/vai-studio/account/" aria-current="page">Account</a>
       <a class="header-cta" href="/vai-studio/download/">Download</a>
       <details class="mobile-menu">
         <summary aria-label="Open navigation menu"><span></span><span></span><span></span></summary>
@@ -34,7 +33,7 @@
           <a href="/vai-studio/">VAI Studio</a>
           <a href="/vai-studio/marketplace/">Templates</a>
           <a href="/vai-studio/pricing/">Pricing</a>
-          <a href="/vai-studio/account/" aria-current="page">Sign in</a>
+          <a href="/vai-studio/account/" aria-current="page">Account</a>
           <a href="/vai-studio/download/">Download</a>
           <a href="/vai-studio/support/">Support</a>
         </nav>
@@ -43,12 +42,13 @@
   </header>
   <main>
     <section class="page">
-      <p class="eyebrow">Account and activation</p>
-      <h1>Sign in and manage VAI Studio</h1>
+      <p class="eyebrow">VychanTech account</p>
+      <h1>Manage your VAI Studio access</h1>
       <p class="lede">Use your VychanTech account to link VAI Studio, review membership access, and keep Founder or Premium purchases attached to the right email.</p>
+      <p class="small">During early access, sign-in may open a secure verification page for VychanTech before returning to your account. Use the same email you use for checkout. VAI Studio never asks for Twitch passwords, Streamer.bot credentials, OAuth tokens, or payment secrets.</p>
       <div class="signin-path" aria-label="How VAI Studio account access works">
-        <div class="signin-step"><strong>1. Sign in here</strong><span>Use the email you used at checkout, or the email you want tied to future purchases.</span></div>
-        <div class="signin-step"><strong>2. Link VAI Studio</strong><span>Open the app, choose Link Account, and enter the code shown there.</span></div>
+        <div class="signin-step"><strong>1. Sign in with your checkout email</strong><span>Use the email you used at checkout, or the email you want tied to future purchases.</span></div>
+        <div class="signin-step"><strong>2. Approve VAI Studio link</strong><span>Open the app, choose Link Account, and approve the page it opens.</span></div>
         <div class="signin-step"><strong>3. Confirm access</strong><span>Your membership and paid templates appear after the account link is complete.</span></div>
       </div>
       <div class="actions account-actions">
@@ -56,14 +56,14 @@
         <a class="button secondary" href="/vai-studio/pricing/">Upgrade</a>
       </div>
       <div class="grid two">
-        <article class="card account-card">
-          <h2>Link this device</h2>
-          <p class="small">Open VAI Studio, choose Link Account, then enter the code shown in the app.</p>
+        <article class="card account-card" id="link-vai-studio">
+          <h2>Approve VAI Studio link</h2>
+          <p class="small" id="link-mode-copy">If VAI Studio did not open your browser, enter the code shown in the app.</p>
           <form id="link-form" class="account-form">
-            <label for="link-code">VAI Studio code</label>
+            <label for="link-code">Verification code</label>
             <div class="inline-form">
               <input id="link-code" name="link-code" autocomplete="one-time-code" placeholder="ABCD-2345">
-              <button class="button" type="submit">Confirm Link</button>
+              <button class="button" id="link-submit" type="submit">Confirm Link</button>
             </div>
           </form>
           <p class="status-line" id="link-status" role="status">Waiting for a VAI Studio link code.</p>
@@ -81,14 +81,14 @@
           <h2>Upgrade access</h2>
           <p class="small">Start checkout from the account you want attached to your VAI Studio membership.</p>
           <div class="checkout-options">
-            <button class="button" type="button" data-checkout-sku="VAI-EARLY-FOUNDER-LIFETIME">Buy Founder $5</button>
-            <button class="button secondary" type="button" data-checkout-sku="VAI-PREMIUM-LIFETIME">Buy Premium $20</button>
+            <button class="button" type="button" data-checkout-sku="VAI-EARLY-FOUNDER-LIFETIME">Get Founder $5</button>
+            <button class="button secondary" type="button" data-checkout-sku="VAI-PREMIUM-LIFETIME">Get Premium $20</button>
           </div>
           <div id="checkout-history" class="checkout-history">No recent checkout sessions loaded yet.</div>
           <p class="status-line" id="checkout-status" role="status">Choose a paid tier after signing in.</p>
         </article>
       </div>
-      <p class="notice">During early access, receipt import remains available as a support fallback. Email support@vychan.tech with your purchase email, PayPal transaction ID, SKU, and VAI Studio version if your membership does not appear.</p>
+      <p class="notice">During early access, account checkout is still being verified end to end. Receipt import remains available as a support fallback; email support@vychan.tech with your purchase email, PayPal transaction ID, SKU, and VAI Studio version if your membership does not appear.</p>
     </section>
 
   </main>
@@ -101,6 +101,8 @@
   </footer>
   <script>
     const linkInput = document.getElementById("link-code");
+    const linkSubmit = document.getElementById("link-submit");
+    const linkModeCopy = document.getElementById("link-mode-copy");
     const linkStatus = document.getElementById("link-status");
     const accountStatus = document.getElementById("account-status");
     const accountEmail = document.getElementById("account-email");
@@ -114,10 +116,14 @@
     const incomingSku = params.get("sku") || "";
     const checkoutState = params.get("checkout") || "";
     const checkoutSession = params.get("session") || params.get("checkout_session_id") || "";
+    let linkClaimInFlight = false;
 
     if (incomingCode) {
       linkInput.value = incomingCode.toUpperCase();
-      setStatus(linkStatus, "Ready to confirm this VAI Studio link code.", "ok");
+      linkInput.readOnly = true;
+      linkSubmit.textContent = "Approve VAI Studio Link";
+      linkModeCopy.textContent = "VAI Studio opened this page. Approve this link to finish in the app.";
+      setStatus(linkStatus, `Only approve this code if you just opened Link Account in VAI Studio on this device: ${linkInput.value}.`, "ok");
     }
     if (incomingSku) {
       setStatus(checkoutStatus, "Signed in. Choose the matching upgrade below to continue to PayPal.", "pending");
@@ -130,16 +136,25 @@
         setStatus(linkStatus, "Enter the code shown in VAI Studio.", "warn");
         return;
       }
-      setStatus(linkStatus, "Confirming device link...", "pending");
+      if (linkClaimInFlight) {
+        return;
+      }
+      linkClaimInFlight = true;
+      linkSubmit.disabled = true;
+      setStatus(linkStatus, "Approving VAI Studio link...", "pending");
       try {
         await requestJson("/api/studio/device/claim", {
           method: "POST",
           body: JSON.stringify({ user_code: code }),
         });
         setStatus(linkStatus, "Linked. Return to VAI Studio to finish activation.", "ok");
+        window.history.replaceState({}, "", "/vai-studio/account/");
         await loadAccount();
       } catch (error) {
         setStatus(linkStatus, error.message, "warn");
+      } finally {
+        linkClaimInFlight = false;
+        linkSubmit.disabled = false;
       }
     });
 
@@ -223,10 +238,13 @@
       try {
         payload = text ? JSON.parse(text) : {};
       } catch {
-        throw new Error("We could not load account details. Try again, or contact support if this continues.");
+        throw new Error("Your secure sign-in session expired. Open the account page and sign in again.");
       }
       if (!response.ok) {
-        throw new Error(payload.message || payload.error || `Account request failed with HTTP ${response.status}.`);
+        if (response.status === 401 || response.status === 403 || response.status === 404) {
+          throw new Error("Your secure sign-in session expired. Open the account page and sign in again.");
+        }
+        throw new Error(payload.message || payload.error || "Account request failed. Refresh the page, then contact support if it continues.");
       }
       return payload;
     }
