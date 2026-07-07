@@ -1,5 +1,5 @@
 (function () {
-  const accountPath = "/login/";
+  const accountPath = "/signin/";
   const downloadPath = "/vai-studio/download/";
   const supportPath = "/vai-studio/support/";
   const signOutPath = "/api/auth/logout?redirect=/";

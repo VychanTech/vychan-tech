@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VychanTech Account | VychanTech</title>
+  <meta name="description" content="Sign in to VychanTech, link VAI Studio, and manage template access.">
+  <link rel="canonical" href="https://vychan.tech/signin/">
+  <meta property="og:title" content="VychanTech Account | VychanTech">
+  <meta property="og:description" content="Sign in to VychanTech, link VAI Studio, and manage template access.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vychan.tech/signin/">
+  <link rel="stylesheet" href="/assets/vai-site.css?v=20260707-login">
+  <script src="/assets/vai-site.js?v=20260707-login" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="VychanTech home"><span class="brand-mark">VT</span><span>VychanTech</span></a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="/vai-studio/">VAI Studio</a>
+      <a href="/vai-studio/marketplace/">Templates</a>
+      <a href="/vai-studio/pricing/">Pricing</a>
+      <a href="/vai-studio/support/">Support</a>
+    </nav>
+    <div class="header-actions" aria-label="Account and download actions">
+      <a class="header-link" data-account-action="signin" href="/signin/" aria-current="page">Account</a>
+      <a class="header-cta" href="/vai-studio/download/">Download</a>
+      <details class="mobile-menu">
+        <summary aria-label="Open navigation menu"><span></span><span></span><span></span></summary>
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+          <a href="/">Home</a>
+          <a href="/products/">Products</a>
+          <a href="/vai-studio/">VAI Studio</a>
+          <a href="/vai-studio/marketplace/">Templates</a>
+          <a href="/vai-studio/pricing/">Pricing</a>
+          <a href="/signin/" aria-current="page">Account</a>
+          <a href="/vai-studio/download/">Download</a>
+          <a href="/vai-studio/support/">Support</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+  <main>
+    <section class="page">
+      <p class="eyebrow">VychanTech account</p>
+      <h1>Sign in to manage VAI Studio.</h1>
+      <p class="lede">Create a VychanTech account with the same email you use for checkout. Your account links VAI Studio, records purchases, and unlocks the templates your membership can access.</p>
+
+      <div class="auth-panel" id="auth-panel">
+        <article class="auth-card">
+          <p class="eyebrow">Customer sign in</p>
+          <h2>Use your VychanTech account</h2>
+          <p class="small">No Cloudflare Access account is required. Use the email you want attached to VAI Studio purchases.</p>
+          <div class="auth-toggle" aria-label="Choose account mode">
+            <button id="auth-login-tab" type="button" aria-pressed="true">Sign in</button>
+            <button id="auth-create-tab" type="button" aria-pressed="false">Create account</button>
+          </div>
+          <form id="auth-form" class="auth-form">
+            <label>Email
+              <input id="auth-email" name="email" type="email" autocomplete="email" required>
+            </label>
+            <label>Password
+              <input id="auth-password" name="password" type="password" autocomplete="current-password" minlength="8" required>
+            </label>
+            <button class="button" id="auth-submit" type="submit">Sign in</button>
+          </form>
+          <p class="status-line" id="auth-status" role="status">Sign in or create an account to continue.</p>
+        </article>
+        <article class="auth-card">
+          <p class="eyebrow">How access works</p>
+          <h2>One account, one VAI Studio link</h2>
+          <p class="small">After signing in, approve the VAI Studio link code shown by the app, then review your Free, Founder, or Premium access below.</p>
+          <p class="small">VAI Studio never asks for Twitch passwords, Streamer.bot credentials, OAuth tokens, or payment secrets.</p>
+        </article>
+      </div>
+
+      <div class="signin-path" aria-label="How VAI Studio account access works">
+        <div class="signin-step"><strong>1. Sign in here</strong><span>Use your VychanTech customer account, not a Cloudflare account.</span></div>
+        <div class="signin-step"><strong>2. Approve VAI Studio link</strong><span>Open the app, choose Link Account, and approve the page it opens.</span></div>
+        <div class="signin-step"><strong>3. Confirm access</strong><span>Your membership and paid templates appear after the account link is complete.</span></div>
+      </div>
+
+      <div class="actions account-actions">
+        <button class="button" id="refresh-account" type="button">Refresh Account</button>
+        <a class="button secondary" href="/vai-studio/pricing/">Upgrade</a>
+      </div>
+      <div class="grid two">
+        <article class="card account-card" id="link-vai-studio">
+          <h2>Approve VAI Studio link</h2>
+          <p class="small" id="link-mode-copy">If VAI Studio did not open your browser, enter the code shown in the app.</p>
+          <form id="link-form" class="account-form">
+            <label for="link-code">Verification code</label>
+            <div class="inline-form">
+              <input id="link-code" name="link-code" autocomplete="one-time-code" placeholder="ABCD-2345">
+              <button class="button" id="link-submit" type="submit">Confirm Link</button>
+            </div>
+          </form>
+          <p class="status-line" id="link-status" role="status">Waiting for a VAI Studio link code.</p>
+        </article>
+        <article class="card account-card">
+          <h2>Membership</h2>
+          <p class="small" id="account-email">Checking sign-in status...</p>
+          <div class="membership-panel">
+            <span class="pill" id="membership-tier">Free</span>
+            <div id="entitlement-list" class="entitlement-list">No paid entitlements loaded yet.</div>
+          </div>
+          <p class="status-line" id="account-status" role="status">Sign in to view your current VAI Studio membership.</p>
+        </article>
+        <article class="card account-card">
+          <h2>Upgrade access</h2>
+          <p class="small">Start checkout from the account you want attached to your VAI Studio membership.</p>
+          <div class="checkout-options">
+            <button class="button" type="button" data-checkout-sku="VAI-EARLY-FOUNDER-LIFETIME">Get Founder $5</button>
+            <button class="button secondary" type="button" data-checkout-sku="VAI-PREMIUM-LIFETIME">Get Premium $20</button>
+          </div>
+          <div id="checkout-history" class="checkout-history">No recent checkout sessions loaded yet.</div>
+          <p class="status-line" id="checkout-status" role="status">Choose a paid tier after signing in.</p>
+        </article>
+      </div>
+      <p class="notice">During early access, account checkout is still being verified end to end. Receipt import remains available as a support fallback; email support@vychan.tech with your purchase email, PayPal transaction ID, SKU, and VAI Studio version if your membership does not appear.</p>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div>
+      <strong>VychanTech</strong>
+      <p>Never send Twitch passwords, payment provider secrets, or Streamer.bot account credentials to VychanTech support.</p>
+    </div>
+    <p><a href="/products/">Products</a> <a href="/vai-studio/">VAI Studio</a> <a href="/vai-studio/marketplace/">Templates</a> <a href="/vai-studio/pricing/">Pricing</a> <a href="/signin/">Account</a> <a href="/vai-studio/support/">Support</a></p>
+  </footer>
+  <script>
+    const authPanel = document.getElementById("auth-panel");
+    const authForm = document.getElementById("auth-form");
+    const authEmail = document.getElementById("auth-email");
+    const authPassword = document.getElementById("auth-password");
+    const authStatus = document.getElementById("auth-status");
+    const authSubmit = document.getElementById("auth-submit");
+    const loginTab = document.getElementById("auth-login-tab");
+    const createTab = document.getElementById("auth-create-tab");
+    const linkInput = document.getElementById("link-code");
+    const linkSubmit = document.getElementById("link-submit");
+    const linkModeCopy = document.getElementById("link-mode-copy");
+    const linkStatus = document.getElementById("link-status");
+    const accountStatus = document.getElementById("account-status");
+    const accountEmail = document.getElementById("account-email");
+    const membershipTier = document.getElementById("membership-tier");
+    const entitlementList = document.getElementById("entitlement-list");
+    const checkoutStatus = document.getElementById("checkout-status");
+    const checkoutHistory = document.getElementById("checkout-history");
+    const refreshButton = document.getElementById("refresh-account");
+    const params = new URLSearchParams(window.location.search);
+    const incomingCode = params.get("link") || "";
+    const incomingSku = params.get("sku") || "";
+    const checkoutState = params.get("checkout") || "";
+    const checkoutSession = params.get("session") || params.get("checkout_session_id") || "";
+    let authMode = params.get("mode") === "create" ? "create" : "login";
+    let linkClaimInFlight = false;
+
+    setAuthMode(authMode);
+    if (incomingCode) {
+      linkInput.value = incomingCode.toUpperCase();
+      linkInput.readOnly = true;
+      linkSubmit.textContent = "Approve VAI Studio Link";
+      linkModeCopy.textContent = "VAI Studio opened this page. Sign in, then approve this link to finish in the app.";
+      setStatus(linkStatus, `Only approve this code if you just opened Link Account in VAI Studio on this device: ${linkInput.value}.`, "ok");
+    }
+    if (incomingSku) {
+      setStatus(checkoutStatus, "Sign in, then choose the matching upgrade below to continue to PayPal.", "pending");
+    }
+
+    loginTab.addEventListener("click", () => setAuthMode("login"));
+    createTab.addEventListener("click", () => setAuthMode("create"));
+    authForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      authSubmit.disabled = true;
+      setStatus(authStatus, authMode === "create" ? "Creating account..." : "Signing in...", "pending");
+      try {
+        await requestJson(authMode === "create" ? "/api/auth/register" : "/api/auth/login", {
+          method: "POST",
+          body: JSON.stringify({
+            email: authEmail.value.trim(),
+            password: authPassword.value,
+          }),
+        });
+        authPassword.value = "";
+        setStatus(authStatus, "Signed in.", "ok");
+        await loadAccount();
+      } catch (error) {
+        setStatus(authStatus, error.message, "warn");
+      } finally {
+        authSubmit.disabled = false;
+      }
+    });
+
+    document.getElementById("link-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const code = linkInput.value.trim().toUpperCase();
+      if (!code) {
+        setStatus(linkStatus, "Enter the code shown in VAI Studio.", "warn");
+        return;
+      }
+      if (linkClaimInFlight) {
+        return;
+      }
+      linkClaimInFlight = true;
+      linkSubmit.disabled = true;
+      setStatus(linkStatus, "Approving VAI Studio link...", "pending");
+      try {
+        await requestJson("/api/customer/device/claim", {
+          method: "POST",
+          body: JSON.stringify({ user_code: code }),
+        });
+        setStatus(linkStatus, "Linked. Return to VAI Studio to finish activation.", "ok");
+        window.history.replaceState({}, "", "/signin/");
+        await loadAccount();
+      } catch (error) {
+        handleAuthError(error, linkStatus);
+      } finally {
+        linkClaimInFlight = false;
+        linkSubmit.disabled = false;
+      }
+    });
+
+    document.querySelectorAll("[data-checkout-sku]").forEach((button) => {
+      button.addEventListener("click", () => startCheckout(button.dataset.checkoutSku));
+    });
+
+    refreshButton.addEventListener("click", loadAccount);
+    handleCheckoutReturn().then(loadAccount);
+
+    async function loadAccount() {
+      setStatus(accountStatus, "Checking your account...", "pending");
+      try {
+        const data = await requestJson("/api/customer/account/me");
+        const account = data.account || {};
+        authPanel.hidden = true;
+        accountEmail.textContent = account.email ? `Signed in as ${account.email}` : "Signed in";
+        membershipTier.textContent = titleCase(account.tier || "free");
+        renderEntitlements(data.entitlements || []);
+        renderCheckouts(data.checkouts || []);
+        updateCheckoutButtons(account.tier || "free");
+        setStatus(accountStatus, "Account status is current.", "ok");
+        window.dispatchEvent(new CustomEvent("vychan-account-loaded", { detail: data }));
+      } catch (error) {
+        authPanel.hidden = false;
+        accountEmail.textContent = "Sign in to your VychanTech account to continue.";
+        membershipTier.textContent = "Unavailable";
+        entitlementList.textContent = "Sign in to view membership details for this browser session.";
+        checkoutHistory.textContent = "Sign in to start or review checkout.";
+        setStatus(accountStatus, error.authRequired ? "Sign in or create a VychanTech account to continue." : error.message, "warn");
+      }
+    }
+
+    async function startCheckout(sku) {
+      setStatus(checkoutStatus, "Creating PayPal checkout...", "pending");
+      try {
+        const data = await requestJson("/api/customer/checkout/paypal/create", {
+          method: "POST",
+          body: JSON.stringify({ sku }),
+        });
+        const approveUrl = data.approve_url || (data.checkout && data.checkout.approval_url);
+        if (!approveUrl) {
+          throw new Error("PayPal approval link was not returned. Contact support if this repeats.");
+        }
+        window.location.href = approveUrl;
+      } catch (error) {
+        handleAuthError(error, checkoutStatus);
+      }
+    }
+
+    async function handleCheckoutReturn() {
+      if (checkoutState === "cancelled") {
+        setStatus(checkoutStatus, "Checkout was cancelled. No account changes were made.", "warn");
+        return;
+      }
+      if (checkoutState !== "success" || !checkoutSession) {
+        return;
+      }
+      setStatus(checkoutStatus, "Confirming PayPal payment...", "pending");
+      try {
+        const data = await requestJson("/api/customer/checkout/paypal/capture", {
+          method: "POST",
+          body: JSON.stringify({ checkout_session_id: checkoutSession }),
+        });
+        setStatus(checkoutStatus, data.message || "PayPal checkout was confirmed.", data.status === "fulfilled" ? "ok" : "pending");
+        window.history.replaceState({}, "", "/signin/");
+      } catch (error) {
+        handleAuthError(error, checkoutStatus);
+      }
+    }
+
+    async function requestJson(path, options = {}) {
+      const response = await fetch(path, {
+        credentials: "include",
+        redirect: "follow",
+        headers: {
+          "Content-Type": "application/json",
+          ...(options.headers || {}),
+        },
+        ...options,
+      });
+      const text = await response.text();
+      let payload = null;
+      try {
+        payload = text ? JSON.parse(text) : {};
+      } catch {
+        throw new Error("We could not load account details. Refresh the page and try again.");
+      }
+      if (!response.ok) {
+        const error = new Error(payload.message || payload.error || "Account request failed. Refresh the page, then contact support if it continues.");
+        error.authRequired = response.status === 401;
+        throw error;
+      }
+      return payload;
+    }
+
+    function setAuthMode(mode) {
+      authMode = mode;
+      loginTab.setAttribute("aria-pressed", mode === "login" ? "true" : "false");
+      createTab.setAttribute("aria-pressed", mode === "create" ? "true" : "false");
+      authSubmit.textContent = mode === "create" ? "Create account" : "Sign in";
+      authPassword.autocomplete = mode === "create" ? "new-password" : "current-password";
+      setStatus(authStatus, mode === "create" ? "Create an account with your checkout email." : "Sign in with your VychanTech account.", "pending");
+    }
+
+    function handleAuthError(error, element) {
+      if (error.authRequired) {
+        authPanel.hidden = false;
+        setStatus(authStatus, "Sign in or create an account first.", "warn");
+        authEmail.focus();
+        setStatus(element, "Sign in to your VychanTech account first.", "warn");
+        return;
+      }
+      setStatus(element, error.message, "warn");
+    }
+
+    function renderEntitlements(entitlements) {
+      if (!entitlements.length) {
+        entitlementList.textContent = "Free templates are available. Paid templates unlock after Founder or Premium purchase.";
+        return;
+      }
+      entitlementList.innerHTML = entitlements.map((item) => {
+        const name = item.template_id || item.access_tier || item.sku || "entitlement";
+        const sku = item.sku ? ` <small>${escapeHtml(item.sku)}</small>` : "";
+        return `<div class="entitlement-row"><strong>${escapeHtml(titleCase(name))}</strong>${sku}</div>`;
+      }).join("");
+    }
+
+    function renderCheckouts(checkouts) {
+      if (!checkouts.length) {
+        checkoutHistory.textContent = "No recent checkout sessions yet.";
+        return;
+      }
+      checkoutHistory.innerHTML = checkouts.map((item) => {
+        const status = titleCase(item.status || "created");
+        const sku = item.sku || "VAI Studio";
+        const paid = item.amount_usd ? `$${Number(item.amount_usd).toFixed(0)}` : "";
+        return `<div class="entitlement-row"><strong>${escapeHtml(status)}</strong><small>${escapeHtml(sku)} ${escapeHtml(paid)}</small></div>`;
+      }).join("");
+    }
+
+    function updateCheckoutButtons(tier) {
+      const normalized = String(tier || "free").toLowerCase();
+      document.querySelectorAll("[data-checkout-sku]").forEach((button) => {
+        const sku = button.dataset.checkoutSku;
+        const alreadyUnlocked = normalized === "premium" || (sku === "VAI-EARLY-FOUNDER-LIFETIME" && (normalized === "founder" || normalized === "early_founder"));
+        button.disabled = alreadyUnlocked;
+        button.classList.toggle("disabled", alreadyUnlocked);
+        if (alreadyUnlocked) {
+          button.textContent = "Already Unlocked";
+        }
+      });
+    }
+
+    function setStatus(element, message, tone) {
+      element.textContent = message;
+      element.dataset.tone = tone;
+    }
+
+    function titleCase(value) {
+      return String(value || "").replace(/[_-]/g, " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+    }
+
+    function escapeHtml(value) {
+      return String(value || "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;",
+      }[char]));
+    }
+  </script>
+</body>
+</html>

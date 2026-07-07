@@ -10,3 +10,5 @@
 /support/ /vai-studio/support/ 301
 /studio /vai-studio/ 301
 /studio/ /vai-studio/ 301
+/login /signin/ 301
+/login/ /signin/ 301
