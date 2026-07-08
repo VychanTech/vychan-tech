@@ -62,7 +62,18 @@
             <label>Password
               <input id="auth-password" name="password" type="password" autocomplete="current-password" minlength="8" required>
             </label>
+            <label id="auth-confirm-label" hidden>Confirm password
+              <input id="auth-confirm-password" name="password-confirmation" type="password" autocomplete="new-password" minlength="8">
+            </label>
             <button class="button" id="auth-submit" type="submit">Sign in</button>
+          </form>
+          <form id="verification-form" class="auth-form" hidden>
+            <p class="small">We sent a six-digit code to <strong id="verification-email"></strong>. Enter it below to activate your account.</p>
+            <label>Verification code
+              <input id="verification-code" name="verification-code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="123456" required>
+            </label>
+            <button class="button" id="verification-submit" type="submit">Verify email</button>
+            <button class="button secondary" id="verification-resend" type="button">Send a new code</button>
           </form>
           <p class="status-line" id="auth-status" role="status">Sign in or create an account to continue.</p>
         </article>
@@ -132,8 +143,15 @@
     const authForm = document.getElementById("auth-form");
     const authEmail = document.getElementById("auth-email");
     const authPassword = document.getElementById("auth-password");
+    const authConfirmLabel = document.getElementById("auth-confirm-label");
+    const authConfirmPassword = document.getElementById("auth-confirm-password");
     const authStatus = document.getElementById("auth-status");
     const authSubmit = document.getElementById("auth-submit");
+    const verificationForm = document.getElementById("verification-form");
+    const verificationEmail = document.getElementById("verification-email");
+    const verificationCode = document.getElementById("verification-code");
+    const verificationSubmit = document.getElementById("verification-submit");
+    const verificationResend = document.getElementById("verification-resend");
     const loginTab = document.getElementById("auth-login-tab");
     const createTab = document.getElementById("auth-create-tab");
     const linkInput = document.getElementById("link-code");
@@ -171,23 +189,78 @@
     createTab.addEventListener("click", () => setAuthMode("create"));
     authForm.addEventListener("submit", async (event) => {
       event.preventDefault();
+      if (authMode === "create" && authPassword.value !== authConfirmPassword.value) {
+        setStatus(authStatus, "Passwords do not match.", "warn");
+        authConfirmPassword.focus();
+        return;
+      }
       authSubmit.disabled = true;
       setStatus(authStatus, authMode === "create" ? "Creating account..." : "Signing in...", "pending");
       try {
-        await requestJson(authMode === "create" ? "/api/auth/register" : "/api/auth/login", {
+        const result = await requestJson(authMode === "create" ? "/api/auth/register" : "/api/auth/login", {
           method: "POST",
           body: JSON.stringify({
             email: authEmail.value.trim(),
             password: authPassword.value,
+            ...(authMode === "create" ? { password_confirmation: authConfirmPassword.value } : {}),
           }),
         });
         authPassword.value = "";
-        setStatus(authStatus, "Signed in.", "ok");
+        authConfirmPassword.value = "";
+        if (result.verification_required) {
+          showVerification(authEmail.value.trim());
+          setStatus(authStatus, result.message || "Check your email for a verification code.", "ok");
+        } else {
+          setStatus(authStatus, "Signed in.", "ok");
+          await loadAccount();
+        }
+      } catch (error) {
+        if (error.code === "email_unverified") {
+          showVerification(authEmail.value.trim());
+        }
+        setStatus(authStatus, error.message, "warn");
+      } finally {
+        authSubmit.disabled = false;
+      }
+    });
+
+    verificationForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      verificationSubmit.disabled = true;
+      setStatus(authStatus, "Verifying your email...", "pending");
+      try {
+        await requestJson("/api/auth/verify-email", {
+          method: "POST",
+          body: JSON.stringify({
+            email: verificationEmail.textContent,
+            code: verificationCode.value,
+          }),
+        });
+        verificationCode.value = "";
+        setStatus(authStatus, "Email verified. You are signed in.", "ok");
         await loadAccount();
       } catch (error) {
         setStatus(authStatus, error.message, "warn");
       } finally {
-        authSubmit.disabled = false;
+        verificationSubmit.disabled = false;
+      }
+    });
+
+    verificationResend.addEventListener("click", async () => {
+      verificationResend.disabled = true;
+      setStatus(authStatus, "Sending a new code...", "pending");
+      try {
+        const result = await requestJson("/api/auth/resend-verification", {
+          method: "POST",
+          body: JSON.stringify({ email: verificationEmail.textContent }),
+        });
+        setStatus(authStatus, result.message, "ok");
+      } catch (error) {
+        setStatus(authStatus, error.message, "warn");
+      } finally {
+        window.setTimeout(() => {
+          verificationResend.disabled = false;
+        }, 60000);
       }
     });
 
@@ -308,6 +381,7 @@
       if (!response.ok) {
         const error = new Error(payload.message || payload.error || "Account request failed. Refresh the page, then contact support if it continues.");
         error.authRequired = response.status === 401;
+        error.code = payload.error || "";
         throw error;
       }
       return payload;
@@ -319,7 +393,18 @@
       createTab.setAttribute("aria-pressed", mode === "create" ? "true" : "false");
       authSubmit.textContent = mode === "create" ? "Create account" : "Sign in";
       authPassword.autocomplete = mode === "create" ? "new-password" : "current-password";
+      authConfirmLabel.hidden = mode !== "create";
+      authConfirmPassword.required = mode === "create";
+      verificationForm.hidden = true;
+      authForm.hidden = false;
       setStatus(authStatus, mode === "create" ? "Create an account with your checkout email." : "Sign in with your VychanTech account.", "pending");
+    }
+
+    function showVerification(email) {
+      verificationEmail.textContent = email;
+      authForm.hidden = true;
+      verificationForm.hidden = false;
+      verificationCode.focus();
     }
 
     function handleAuthError(error, element) {
