@@ -93,8 +93,7 @@
 
     dropdown.append(
       meta,
-      createLink("Manage Account", accountPath),
-      createLink("Link VAI Studio", `${accountPath}#link-vai-studio`),
+      createLink("Account overview", accountPath),
       createLink("Download VAI Studio", downloadPath),
       createLink("Support", supportPath),
     );
@@ -104,7 +103,7 @@
 
     menu.append(summary, dropdown);
     signIn.replaceWith(menu);
-    wireAccountMenu(menu);
+    wireHeaderMenu(menu);
   }
 
   function updateAccountLinks(data) {
@@ -131,9 +130,41 @@
       summary.append(small, strong);
       mobileNav.prepend(summary);
     }
+    if (mobileNav && email && !mobileNav.querySelector(".mobile-signout")) {
+      const signOut = createLink("Sign out", signOutPath);
+      signOut.className = "mobile-signout";
+      mobileNav.append(signOut);
+    }
   }
 
-  function wireAccountMenu(menu) {
+  function wireHeaderMenu(menu) {
+    if (!menu || menu.dataset.menuWired === "true") {
+      return;
+    }
+    menu.dataset.menuWired = "true";
+    const summary = menu.querySelector(":scope > summary");
+
+    menu.addEventListener("toggle", () => {
+      if (summary) {
+        const kind = menu.classList.contains("account-menu") ? "account menu" : "navigation menu";
+        summary.setAttribute("aria-label", `${menu.open ? "Close" : "Open"} ${kind}`);
+      }
+      if (!menu.open) {
+        return;
+      }
+      document.querySelectorAll(".header-actions > details[open]").forEach((otherMenu) => {
+        if (otherMenu !== menu) {
+          otherMenu.removeAttribute("open");
+        }
+      });
+    });
+
+    menu.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        menu.removeAttribute("open");
+      }
+    });
+
     document.addEventListener("click", (event) => {
       if (!menu.open || menu.contains(event.target)) {
         return;
@@ -158,6 +189,7 @@
   });
 
   onReady(async () => {
+    wireHeaderMenu(document.querySelector(".mobile-menu"));
     const data = await loadAccount();
     if (!data) {
       window.dispatchEvent(new CustomEvent("vychan-account-unavailable"));
