@@ -33,6 +33,45 @@
     return link;
   }
 
+  function normalizedTier(tier) {
+    return String(tier || "free").toLowerCase();
+  }
+
+  function isFounderTier(tier) {
+    const normalized = normalizedTier(tier);
+    return normalized === "founder" || normalized === "early_founder";
+  }
+
+  function planCoveredByTier(plan, tier) {
+    const normalizedPlan = String(plan || "").toLowerCase();
+    const normalized = normalizedTier(tier);
+    if (normalized === "premium") {
+      return normalizedPlan === "founder" || normalizedPlan === "premium";
+    }
+    if (isFounderTier(normalized)) {
+      return normalizedPlan === "founder";
+    }
+    return false;
+  }
+
+  function disablePlanAction(link, label) {
+    if (!link.dataset.originalHref) {
+      link.dataset.originalHref = link.getAttribute("href") || "";
+    }
+    link.textContent = label;
+    link.classList.add("disabled");
+    link.setAttribute("aria-disabled", "true");
+    link.removeAttribute("href");
+  }
+
+  function enablePlanAction(link, label) {
+    const originalHref = link.dataset.originalHref || link.getAttribute("href") || accountPath;
+    link.textContent = label;
+    link.classList.remove("disabled");
+    link.removeAttribute("aria-disabled");
+    link.setAttribute("href", originalHref);
+  }
+
   async function loadAccount() {
     try {
       const response = await fetch("/api/auth/me", {
@@ -137,6 +176,25 @@
     }
   }
 
+  function updatePlanActions(data) {
+    const tier = data && data.account ? data.account.tier : "free";
+    document.querySelectorAll("[data-plan-action]").forEach((link) => {
+      const plan = String(link.dataset.planAction || "").toLowerCase();
+      if (!plan) {
+        return;
+      }
+      if (plan === "founder" && normalizedTier(tier) === "premium") {
+        disablePlanAction(link, "Included with Premium");
+        return;
+      }
+      if (planCoveredByTier(plan, tier)) {
+        disablePlanAction(link, "Current plan");
+        return;
+      }
+      enablePlanAction(link, plan === "premium" ? "Get Premium" : "Get Founder");
+    });
+  }
+
   function wireHeaderMenu(menu) {
     if (!menu || menu.dataset.menuWired === "true") {
       return;
@@ -186,6 +244,7 @@
     window.VychanAccount = data;
     replaceHeaderSignIn(data);
     updateAccountLinks(data);
+    updatePlanActions(data);
   });
 
   onReady(async () => {
@@ -198,6 +257,7 @@
     window.VychanAccount = data;
     replaceHeaderSignIn(data);
     updateAccountLinks(data);
+    updatePlanActions(data);
     window.dispatchEvent(new CustomEvent("vychan-account-loaded", { detail: data }));
   });
 }());

@@ -637,6 +637,10 @@ h3 { letter-spacing: 0; }
   border-bottom: 1px solid var(--line-soft);
 }
 
+.access-row.no-action {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
 .access-row h3 {
   margin: 0 0 4px;
   font-size: 19px;

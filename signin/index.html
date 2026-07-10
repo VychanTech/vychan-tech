@@ -10,8 +10,8 @@
   <meta property="og:description" content="Sign in to VychanTech and manage account access.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vychan.tech/signin/">
-  <link rel="stylesheet" href="/assets/vai-site.css?v=20260710-account-clean">
-  <script src="/assets/vai-site.js?v=20260710-account-clean" defer></script>
+  <link rel="stylesheet" href="/assets/vai-site.css?v=20260710-plan-aware">
+  <script src="/assets/vai-site.js?v=20260710-plan-aware" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -726,13 +726,37 @@
       const normalized = String(tier || "free").toLowerCase();
       document.querySelectorAll("[data-checkout-sku]").forEach((button) => {
         const sku = button.dataset.checkoutSku;
-        const alreadyUnlocked = normalized === "premium" || (sku === "VAI-EARLY-FOUNDER-LIFETIME" && (normalized === "founder" || normalized === "early_founder"));
-        button.disabled = alreadyUnlocked;
-        button.classList.toggle("disabled", alreadyUnlocked);
-        if (alreadyUnlocked) {
-          button.textContent = "Purchased";
+        const isFounderButton = sku === "VAI-EARLY-FOUNDER-LIFETIME";
+        const isPremiumButton = sku === "VAI-PREMIUM-LIFETIME";
+        const isFounder = normalized === "founder" || normalized === "early_founder";
+        const isPremium = normalized === "premium";
+        let disabled = false;
+        let label = button.textContent;
+        if (isFounderButton) {
+          if (isPremium) {
+            disabled = true;
+            label = "Included with Premium";
+          } else if (isFounder) {
+            disabled = true;
+            label = "Current plan";
+          } else {
+            label = "Get Founder $5";
+          }
+        } else if (isPremiumButton) {
+          if (isPremium) {
+            disabled = true;
+            label = "Current plan";
+          } else {
+            label = "Get Premium $20";
+          }
         }
+        button.disabled = disabled;
+        button.classList.toggle("disabled", disabled);
+        button.textContent = label;
       });
+      if (activeSku && tierCoversSku(normalized, activeSku) && checkoutState !== "success") {
+        setStatus(checkoutStatus, "Your current membership already includes this access.", "ok");
+      }
     }
 
     function updatePendingConnection(tier) {
