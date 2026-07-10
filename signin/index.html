@@ -10,32 +10,29 @@
   <meta property="og:description" content="Sign in to VychanTech, link VAI Studio, and manage template access.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vychan.tech/signin/">
-  <link rel="stylesheet" href="/assets/vai-site.css?v=20260708-account">
-  <script src="/assets/vai-site.js?v=20260708-account" defer></script>
+  <link rel="stylesheet" href="/assets/vai-site.css?v=20260710-simple">
+  <script src="/assets/vai-site.js?v=20260710-simple" defer></script>
 </head>
 <body>
   <header class="site-header">
     <a class="brand" href="/" aria-label="VychanTech home"><span class="brand-mark">VT</span><span>VychanTech</span></a>
     <nav class="desktop-nav" aria-label="Primary navigation">
-      <a href="/vai-studio/">VAI Studio</a>
-      <a href="/vai-studio/marketplace/">Templates</a>
-      <a href="/vai-studio/pricing/">Pricing</a>
-      <a href="/vai-studio/support/">Support</a>
+      <a href="/">VAI Studio</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/download/">Download</a>
+      <a href="/support/">Support</a>
     </nav>
     <div class="header-actions" aria-label="Account and download actions">
       <a class="header-link" data-account-action="signin" href="/signin/" aria-current="page">Account</a>
-      <a class="header-cta" href="/vai-studio/download/">Download</a>
+      <a class="header-cta" href="/download/">Download</a>
       <details class="mobile-menu">
         <summary aria-label="Open navigation menu"><span></span><span></span><span></span></summary>
         <nav class="mobile-nav" aria-label="Mobile navigation">
-          <a href="/">Home</a>
-          <a href="/products/">Products</a>
-          <a href="/vai-studio/">VAI Studio</a>
-          <a href="/vai-studio/marketplace/">Templates</a>
-          <a href="/vai-studio/pricing/">Pricing</a>
+          <a href="/">VAI Studio</a>
+          <a href="/#pricing">Pricing</a>
+          <a href="/download/">Download</a>
           <a href="/signin/" aria-current="page">Account</a>
-          <a href="/vai-studio/download/">Download</a>
-          <a href="/vai-studio/support/">Support</a>
+          <a href="/support/">Support</a>
         </nav>
       </details>
     </div>
@@ -44,7 +41,7 @@
     <section class="page">
       <p class="eyebrow">VychanTech account</p>
       <h1>Your VAI Studio account</h1>
-      <p class="lede">Sign in to manage your membership, purchases, and VAI Studio connection.</p>
+      <p class="lede">Sign in, review access, buy upgrades, and connect the desktop app.</p>
 
       <div class="auth-panel" id="auth-panel">
         <article class="auth-card">
@@ -129,12 +126,6 @@
           </div>
         </header>
 
-        <nav class="account-nav" aria-label="Account sections">
-          <a href="#membership">Membership</a>
-          <a href="#link-vai-studio">Link VAI Studio</a>
-          <a href="#billing">Billing</a>
-        </nav>
-
         <section class="account-section" id="membership">
           <div class="account-section-heading">
             <div>
@@ -147,29 +138,29 @@
         </section>
 
         <section class="account-section" id="link-vai-studio">
-          <h2>Approve VAI Studio link</h2>
-          <p class="small" id="link-mode-copy">Enter the code shown by VAI Studio to connect this account.</p>
+          <h2>Connect VAI Studio</h2>
+          <p class="small" id="link-mode-copy">Open VAI Studio and choose Connect Account. This page will show the connection approval here.</p>
           <form id="link-form" class="account-form">
-            <label for="link-code">Verification code</label>
+            <label for="link-code" id="link-code-label">Connection code</label>
             <div class="inline-form">
               <input id="link-code" name="link-code" autocomplete="one-time-code" placeholder="ABCD-2345">
-              <button class="button" id="link-submit" type="submit">Connect</button>
+              <button class="button" id="link-submit" type="submit">Connect VAI Studio</button>
             </div>
           </form>
           <p class="status-line" id="link-status" role="status" aria-live="polite" hidden></p>
         </section>
 
         <section class="account-section" id="billing">
-          <h2>Plans and billing</h2>
-          <p class="small">Lifetime upgrades are attached to this account.</p>
+          <h2>Upgrade</h2>
+          <p class="small">Choose a one-time lifetime upgrade. Purchases attach to this signed-in account.</p>
           <div class="checkout-options">
             <button class="button" type="button" data-checkout-sku="VAI-EARLY-FOUNDER-LIFETIME">Get Founder $5</button>
             <button class="button secondary" type="button" data-checkout-sku="VAI-PREMIUM-LIFETIME">Get Premium $20</button>
           </div>
-          <div id="checkout-history" class="checkout-history">No recent checkout sessions loaded yet.</div>
+          <div id="checkout-history" class="checkout-history" hidden></div>
           <p class="status-line" id="checkout-status" role="status" aria-live="polite" hidden></p>
           <details class="support-note">
-            <summary>Membership not showing?</summary>
+            <summary>Need help?</summary>
             <p>Email support@vychan.tech with your purchase email, PayPal transaction ID, SKU, and VAI Studio version.</p>
           </details>
         </section>
@@ -181,7 +172,7 @@
       <strong>VychanTech</strong>
       <p>Never send Twitch passwords, payment provider secrets, or Streamer.bot account credentials to VychanTech support.</p>
     </div>
-    <p><a href="/products/">Products</a> <a href="/vai-studio/">VAI Studio</a> <a href="/vai-studio/marketplace/">Templates</a> <a href="/vai-studio/pricing/">Pricing</a> <a href="/signin/">Account</a> <a href="/vai-studio/support/">Support</a></p>
+    <p><a href="/">VAI Studio</a> <a href="/download/">Download</a> <a href="/signin/">Account</a> <a href="/support/">Support</a></p>
   </footer>
   <script>
     const authPanel = document.getElementById("auth-panel");
@@ -213,6 +204,7 @@
     const createTab = document.getElementById("auth-create-tab");
     const accountDashboard = document.getElementById("account-dashboard");
     const linkInput = document.getElementById("link-code");
+    const linkCodeLabel = document.getElementById("link-code-label");
     const linkSubmit = document.getElementById("link-submit");
     const linkModeCopy = document.getElementById("link-mode-copy");
     const linkStatus = document.getElementById("link-status");
@@ -226,6 +218,14 @@
     const params = new URLSearchParams(window.location.search);
     const incomingCode = params.get("link") || "";
     const incomingSku = params.get("sku") || "";
+    if (incomingCode) {
+      window.sessionStorage.setItem("vychanPendingLinkCode", incomingCode.toUpperCase());
+    }
+    if (incomingSku) {
+      window.sessionStorage.setItem("vychanPendingSku", incomingSku);
+    }
+    const activeLinkCode = (incomingCode || window.sessionStorage.getItem("vychanPendingLinkCode") || "").toUpperCase();
+    const activeSku = incomingSku || window.sessionStorage.getItem("vychanPendingSku") || "";
     const checkoutState = params.get("checkout") || "";
     const checkoutSession = params.get("session") || params.get("checkout_session_id") || "";
     let authMode = params.get("mode") === "create" ? "create" : "login";
@@ -238,15 +238,17 @@
     authSubmit.disabled = true;
     setAuthMode(authMode);
     loadAuthConfig();
-    if (incomingCode) {
-      linkInput.value = incomingCode.toUpperCase();
+    if (activeLinkCode) {
+      linkInput.value = activeLinkCode;
       linkInput.readOnly = true;
-      linkSubmit.textContent = "Approve VAI Studio Link";
-      linkModeCopy.textContent = "VAI Studio opened this page. Sign in, then approve this link to finish in the app.";
-      setStatus(linkStatus, `Only approve this code if you just opened Link Account in VAI Studio on this device: ${linkInput.value}.`, "ok");
+      linkInput.hidden = true;
+      linkCodeLabel.hidden = true;
+      linkSubmit.textContent = "Connect VAI Studio";
+      linkModeCopy.textContent = "VAI Studio is waiting for this account. Sign in, then connect when your membership is ready.";
+      setStatus(linkStatus, "Only connect if you just opened this page from VAI Studio.", "ok");
     }
-    if (incomingSku) {
-      setStatus(checkoutStatus, "Sign in, then choose the matching upgrade below to continue to PayPal.", "pending");
+    if (activeSku) {
+      setStatus(checkoutStatus, "Sign in, then continue with the selected upgrade.", "pending");
     }
 
     loginTab.addEventListener("click", () => setAuthMode("login"));
@@ -383,7 +385,7 @@
       event.preventDefault();
       const code = linkInput.value.trim().toUpperCase();
       if (!code) {
-        setStatus(linkStatus, "Enter the code shown in VAI Studio.", "warn");
+        setStatus(linkStatus, "Open VAI Studio and choose Connect Account first.", "warn");
         return;
       }
       if (linkClaimInFlight) {
@@ -397,7 +399,8 @@
           method: "POST",
           body: JSON.stringify({ user_code: code }),
         });
-        setStatus(linkStatus, "Linked. Return to VAI Studio to finish activation.", "ok");
+        window.sessionStorage.removeItem("vychanPendingLinkCode");
+        setStatus(linkStatus, "Connected. Return to VAI Studio; activation will finish there.", "ok");
         window.history.replaceState({}, "", "/signin/");
         await loadAccount();
       } catch (error) {
@@ -429,13 +432,14 @@
         renderEntitlements(data.entitlements || []);
         renderCheckouts(data.checkouts || []);
         updateCheckoutButtons(account.tier || "free");
+        updatePendingConnection(account.tier || "free");
         if (announce) {
           setStatus(accountStatus, "Account refreshed.", "ok");
         } else {
           hideStatus(accountStatus);
         }
         window.dispatchEvent(new CustomEvent("vychan-account-loaded", { detail: data }));
-        focusPendingIntent();
+        focusPendingIntent(account);
       } catch (error) {
         accountDashboard.hidden = true;
         authPanel.hidden = false;
@@ -447,6 +451,12 @@
 
     async function startCheckout(sku) {
       setStatus(checkoutStatus, "Creating PayPal checkout...", "pending");
+      if (sku) {
+        window.sessionStorage.setItem("vychanPendingSku", sku);
+      }
+      if (activeLinkCode || linkInput.value.trim()) {
+        window.sessionStorage.setItem("vychanPendingLinkCode", (activeLinkCode || linkInput.value.trim()).toUpperCase());
+      }
       try {
         const data = await requestJson("/api/customer/checkout/paypal/create", {
           method: "POST",
@@ -477,7 +487,8 @@
           body: JSON.stringify({ checkout_session_id: checkoutSession }),
         });
         setStatus(checkoutStatus, data.message || "PayPal checkout was confirmed.", data.status === "fulfilled" ? "ok" : "pending");
-        window.history.replaceState({}, "", "/signin/");
+        const pendingLink = window.sessionStorage.getItem("vychanPendingLinkCode") || "";
+        window.history.replaceState({}, "", pendingLink ? `/signin/?link=${encodeURIComponent(pendingLink)}` : "/signin/");
       } catch (error) {
         handleAuthError(error, checkoutStatus);
       }
@@ -580,19 +591,19 @@
       verificationCode.focus();
     }
 
-    function focusPendingIntent() {
+    function focusPendingIntent(account) {
       if (pendingIntentFocused) {
         return;
       }
-      const target = incomingCode
+      const target = activeLinkCode && (!activeSku || tierCoversSku(account && account.tier, activeSku))
         ? document.getElementById("link-vai-studio")
-        : (incomingSku ? document.getElementById("billing") : null);
+        : (activeSku ? document.getElementById("billing") : null);
       if (!target) {
         return;
       }
       pendingIntentFocused = true;
-      if (incomingSku) {
-        setStatus(checkoutStatus, "Choose the matching plan to continue to PayPal.", "pending");
+      if (activeSku && (!account || !tierCoversSku(account.tier, activeSku))) {
+        setStatus(checkoutStatus, "Continue to PayPal, then connect VAI Studio after checkout returns.", "pending");
       }
       window.requestAnimationFrame(() => {
         target.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -665,9 +676,10 @@
 
     function renderCheckouts(checkouts) {
       if (!checkouts.length) {
-        checkoutHistory.textContent = "No recent checkout sessions yet.";
+        checkoutHistory.hidden = true;
         return;
       }
+      checkoutHistory.hidden = false;
       checkoutHistory.innerHTML = checkouts.map((item) => {
         const status = titleCase(item.status || "created");
         const sku = item.sku || "VAI Studio";
@@ -687,6 +699,30 @@
           button.textContent = "Already Unlocked";
         }
       });
+    }
+
+    function updatePendingConnection(tier) {
+      if (!activeLinkCode) {
+        return;
+      }
+      const needsUpgrade = activeSku && !tierCoversSku(tier, activeSku);
+      linkSubmit.disabled = needsUpgrade;
+      if (needsUpgrade) {
+        setStatus(linkStatus, "Upgrade this account first. After PayPal returns, connect VAI Studio here.", "pending");
+        return;
+      }
+      setStatus(linkStatus, "Ready to connect VAI Studio to this account.", "ok");
+    }
+
+    function tierCoversSku(tier, sku) {
+      const normalized = String(tier || "free").toLowerCase();
+      if (normalized === "premium") {
+        return true;
+      }
+      if (String(sku || "").toUpperCase() === "VAI-EARLY-FOUNDER-LIFETIME") {
+        return normalized === "early_founder" || normalized === "founder";
+      }
+      return false;
     }
 
     function setStatus(element, message, tone) {

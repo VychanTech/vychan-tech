@@ -1,7 +1,7 @@
 (function () {
   const accountPath = "/signin/";
-  const downloadPath = "/vai-studio/download/";
-  const supportPath = "/vai-studio/support/";
+  const downloadPath = "/download/";
+  const supportPath = "/support/";
   const signOutPath = "/api/auth/logout?redirect=/";
 
   function onReady(callback) {

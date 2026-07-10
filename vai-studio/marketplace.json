@@ -1,22 +1,22 @@
 {
   "schema_version": "vai-public-marketplace-feed-v2",
-  "created_at": "2026-07-07T14:49:11+00:00",
+  "created_at": "2026-07-10T01:46:47+00:00",
   "publisher": "VychanTech",
   "site_url": "https://vychan.tech",
   "product_name": "VAI Studio",
   "product_base_path": "/vai-studio",
-  "product_url": "https://vychan.tech/vai-studio/",
+  "product_url": "https://vychan.tech/products/",
   "support_email": "support@vychan.tech",
   "download_url": "https://github.com/VychanTech/VychanAI-Studio-Releases/releases/download/v0.1.0-alpha.16/VychanAI-Studio.zip",
-  "download_page_url": "https://vychan.tech/vai-studio/download/",
+  "download_page_url": "https://vychan.tech/download/",
   "download_checksum_url": "https://github.com/VychanTech/VychanAI-Studio-Releases/releases/download/v0.1.0-alpha.16/VychanAI-Studio.zip.sha256.txt",
-  "pricing_url": "https://vychan.tech/vai-studio/pricing/",
-  "marketplace_url": "https://vychan.tech/vai-studio/marketplace/",
+  "pricing_url": "https://vychan.tech/#pricing",
+  "marketplace_url": "https://vychan.tech/#templates",
   "account_url": "https://vychan.tech/signin/",
-  "success_url": "https://vychan.tech/vai-studio/success/",
-  "support_url": "https://vychan.tech/vai-studio/support/",
-  "billing_portal_url": "https://vychan.tech/vai-studio/support/",
-  "customer_portal_url": "https://vychan.tech/vai-studio/support/",
+  "success_url": "https://vychan.tech/success/",
+  "support_url": "https://vychan.tech/support/",
+  "billing_portal_url": "https://vychan.tech/support/",
+  "customer_portal_url": "https://vychan.tech/support/",
   "products": [
     {
       "sku": "VAI-EARLY-FOUNDER-LIFETIME",
@@ -37,10 +37,10 @@
         "Founder template updates",
         "Founder status in VAI Studio"
       ],
-      "checkout_url": "https://www.paypal.com/ncp/payment/UJJ6KNZS9ZVRQ",
+      "checkout_url": "https://vychan.tech/signin/?sku=VAI-EARLY-FOUNDER-LIFETIME",
       "checkout_ready": true,
-      "fallback_url": "https://vychan.tech/vai-studio/pricing/#vai-early-founder-lifetime",
-      "success_url": "https://vychan.tech/vai-studio/success/",
+      "fallback_url": "https://vychan.tech/#pricing",
+      "success_url": "https://vychan.tech/success/",
       "account_url": "https://vychan.tech/signin/"
     },
     {
@@ -63,10 +63,10 @@
         "Unlocks Premium templates",
         "Premium template updates"
       ],
-      "checkout_url": "https://www.paypal.com/ncp/payment/34AGY4U3ELS8S",
+      "checkout_url": "https://vychan.tech/signin/?sku=VAI-PREMIUM-LIFETIME",
       "checkout_ready": true,
-      "fallback_url": "https://vychan.tech/vai-studio/pricing/#vai-premium-lifetime",
-      "success_url": "https://vychan.tech/vai-studio/success/",
+      "fallback_url": "https://vychan.tech/#pricing",
+      "success_url": "https://vychan.tech/success/",
       "account_url": "https://vychan.tech/signin/"
     }
   ],
@@ -80,7 +80,7 @@
       "price_usd": 0,
       "category": "chat-game",
       "summary": "A beginner-friendly Twitch chat adventure starter for Streamer.bot.",
-      "marketplace_url": "https://vychan.tech/vai-studio/marketplace/#starter-chat-rpg"
+      "marketplace_url": "https://vychan.tech/#templates"
     },
     {
       "template_id": "chaos_wheel",
@@ -91,7 +91,7 @@
       "price_usd": 0,
       "category": "stream-reactions",
       "summary": "A safe random chat-event wheel with an optional reward idea.",
-      "marketplace_url": "https://vychan.tech/vai-studio/marketplace/#chaos-wheel"
+      "marketplace_url": "https://vychan.tech/#templates"
     },
     {
       "template_id": "stream_pet",
@@ -102,7 +102,7 @@
       "price_usd": 0,
       "category": "community-progression",
       "summary": "A cozy starter pet progression game with care commands and milestone rewards.",
-      "marketplace_url": "https://vychan.tech/vai-studio/marketplace/#stream-pet"
+      "marketplace_url": "https://vychan.tech/#templates"
     },
     {
       "template_id": "raid_boss",
@@ -113,7 +113,7 @@
       "price_usd": 5,
       "category": "event-game",
       "summary": "A community boss-fight event template with attacks, heals, MVPs, and manual reward buffs.",
-      "marketplace_url": "https://vychan.tech/vai-studio/marketplace/#raid-boss"
+      "marketplace_url": "https://vychan.tech/#templates"
     },
     {
       "template_id": "show_control_overlay",
@@ -124,11 +124,11 @@
       "price_usd": 20,
       "category": "show-control",
       "summary": "A guarded advanced template for chat-reviewed show moments, OBS cues, audio/TTS hooks, and optional local API control.",
-      "marketplace_url": "https://vychan.tech/vai-studio/marketplace/#show-control-overlay"
+      "marketplace_url": "https://vychan.tech/#templates"
     }
   ],
   "customer_notes": [
-    "VAI Studio purchases link to your VychanTech account; signed receipt import remains a support fallback.",
+    "VAI Studio purchases link to your VychanTech account.",
     "Twitch and Streamer.bot connections remain user-managed."
   ]
 }
