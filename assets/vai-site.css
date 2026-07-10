@@ -571,6 +571,53 @@ h3 { letter-spacing: 0; }
   justify-content: flex-end;
 }
 
+.product-detail {
+  max-width: 1060px;
+}
+
+.product-title {
+  font-size: clamp(44px, 7vw, 72px);
+  margin-bottom: 10px;
+}
+
+.product-tagline {
+  max-width: 760px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.install-help {
+  max-width: 760px;
+  margin: 24px 0 10px;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.install-help summary {
+  padding: 14px 16px;
+  cursor: pointer;
+  font-weight: 900;
+  list-style-position: inside;
+}
+
+.install-help summary:hover {
+  color: var(--ink);
+  background: var(--panel-2);
+}
+
+.install-help-body {
+  padding: 0 16px 16px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.compact-steps {
+  margin: 12px 0 0;
+}
+
 .product-summary {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

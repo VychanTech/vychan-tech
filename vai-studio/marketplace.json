@@ -1,6 +1,6 @@
 {
   "schema_version": "vai-public-marketplace-feed-v2",
-  "created_at": "2026-07-10T19:09:24+00:00",
+  "created_at": "2026-07-10T19:28:14+00:00",
   "publisher": "VychanTech",
   "site_url": "https://vychan.tech",
   "product_name": "VAI Studio",
@@ -8,7 +8,7 @@
   "product_url": "https://vychan.tech/products/vai-studio/",
   "support_email": "support@vychan.tech",
   "download_url": "https://github.com/VychanTech/VychanAI-Studio-Releases/releases/download/v0.1.0-alpha.17/VychanAI-Studio.zip",
-  "download_page_url": "https://vychan.tech/download/",
+  "download_page_url": "https://vychan.tech/products/vai-studio/",
   "download_checksum_url": "https://github.com/VychanTech/VychanAI-Studio-Releases/releases/download/v0.1.0-alpha.17/VychanAI-Studio.zip.sha256.txt",
   "pricing_url": "https://vychan.tech/products/vai-studio/#access",
   "marketplace_url": "https://vychan.tech/products/vai-studio/#templates",

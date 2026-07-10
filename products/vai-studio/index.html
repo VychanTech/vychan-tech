@@ -21,15 +21,13 @@
       <a href="/products/" aria-current="page">Products</a>
       <a href="/support/">Support</a>
     </nav>
-    <div class="header-actions" aria-label="Account and download actions">
+    <div class="header-actions" aria-label="Account actions">
       <a class="header-link" data-account-action="signin" href="/signin/">Sign in</a>
-      <a class="header-cta" href="/download/">Download</a>
       <details class="mobile-menu">
         <summary aria-label="Open navigation menu"><span></span><span></span><span></span></summary>
         <nav class="mobile-nav" aria-label="Mobile navigation">
           <a href="/">Home</a>
           <a href="/products/" aria-current="page">Products</a>
-          <a href="/download/">Download</a>
           <a href="/signin/">Sign in</a>
           <a href="/support/">Support</a>
         </nav>
@@ -38,21 +36,35 @@
   </header>
   <main>
     <section class="page product-detail">
-      <p class="eyebrow">VAI Studio</p>
-      <h1>Streamer.bot template management for creators.</h1>
-      <p class="lede">Download the Windows app, connect your VychanTech account, and apply the templates your membership unlocks.</p>
+      <p class="eyebrow">Product</p>
+      <h1 class="product-title">VAI Studio</h1>
+      <p class="product-tagline">Apply Streamer.bot templates, manage account access, and keep creator workflows repeatable.</p>
       <div class="actions">
         <a class="button" href="https://github.com/VychanTech/VychanAI-Studio-Releases/releases/download/v0.1.0-alpha.17/VychanAI-Studio.zip">Download</a>
         <a class="button secondary" href="/signin/">Open account</a>
       </div>
 
+      <details class="install-help" id="install-help">
+        <summary>Install help</summary>
+        <div class="install-help-body">
+          <p>Current release: v0.1.0-alpha.17. This Windows build is not publicly code-signed yet, so SmartScreen may warn.</p>
+          <p><a href="https://github.com/VychanTech/VychanAI-Studio-Releases/releases/download/v0.1.0-alpha.17/VychanAI-Studio.zip.sha256.txt">SHA-256 checksum</a> is available if you want to verify the download.</p>
+          <ol class="steps compact-steps">
+            <li>Download <code>VychanAI-Studio.zip</code>.</li>
+            <li>Right-click the zip and choose Extract All.</li>
+            <li>Open the extracted folder and run <code>Install VAI Studio.cmd</code>.</li>
+            <li>Open VAI Studio from the Windows Start Menu.</li>
+          </ol>
+        </div>
+      </details>
+
       <section class="product-summary" aria-label="VAI Studio summary">
         <article>
-          <h2>What it does</h2>
+          <h2>Builder</h2>
           <p>VAI Studio keeps template setup repeatable: choose a template, review the included setup notes, export what you need, and verify the result inside Streamer.bot.</p>
         </article>
         <article>
-          <h2>How access works</h2>
+          <h2>Account access</h2>
           <p>Free, Founder, and Premium access is attached to your VychanTech account. Sign in inside VAI Studio to see the templates available to you.</p>
         </article>
       </section>
@@ -110,7 +122,7 @@
       <strong>VychanTech</strong>
       <p>Practical software products from VychanTech LLC.</p>
     </div>
-    <p><a href="/">Home</a> <a href="/products/">Products</a> <a href="/download/">Download</a> <a href="/signin/">Account</a> <a href="/support/">Support</a></p>
+    <p><a href="/">Home</a> <a href="/products/">Products</a> <a href="/signin/">Account</a> <a href="/support/">Support</a></p>
   </footer>
 </body>
 </html>
