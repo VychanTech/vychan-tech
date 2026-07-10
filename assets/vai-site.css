@@ -534,6 +534,73 @@ h3 { letter-spacing: 0; }
   font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
 }
 
+.product-list {
+  display: grid;
+  max-height: min(64vh, 640px);
+  margin-top: 30px;
+  overflow-y: auto;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  background: var(--line-soft);
+}
+
+.product-list-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  padding: 20px;
+  background: var(--panel);
+}
+
+.product-list-copy h2 {
+  margin: 0 0 8px;
+}
+
+.product-list-copy p {
+  max-width: 620px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.product-list-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.product-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 42px 0;
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  background: var(--line-soft);
+}
+
+.product-summary article {
+  padding: 22px;
+  background: var(--panel);
+}
+
+.product-summary h2 {
+  margin: 0 0 10px;
+}
+
+.product-summary p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.product-section {
+  margin-top: 42px;
+}
+
 .muted-card { background: #141419; }
 
 .pill {
@@ -1135,6 +1202,13 @@ code {
     grid-template-columns: 1fr;
     min-height: auto;
   }
+  .product-list-item,
+  .product-summary {
+    grid-template-columns: 1fr;
+  }
+  .product-list-actions {
+    justify-content: flex-start;
+  }
   .brand-strip,
   .template-columns { grid-template-columns: 1fr; }
 }
@@ -1173,6 +1247,10 @@ code {
   }
   .account-profile-actions .button {
     flex: 1 1 120px;
+    text-align: center;
+  }
+  .product-list-actions .button {
+    flex: 1 1 130px;
     text-align: center;
   }
   .verification-actions {

@@ -1,17 +1,17 @@
 {
   "schema_version": "vai-public-marketplace-feed-v2",
-  "created_at": "2026-07-10T01:58:23+00:00",
+  "created_at": "2026-07-10T19:09:24+00:00",
   "publisher": "VychanTech",
   "site_url": "https://vychan.tech",
   "product_name": "VAI Studio",
   "product_base_path": "/vai-studio",
-  "product_url": "https://vychan.tech/products/",
+  "product_url": "https://vychan.tech/products/vai-studio/",
   "support_email": "support@vychan.tech",
   "download_url": "https://github.com/VychanTech/VychanAI-Studio-Releases/releases/download/v0.1.0-alpha.17/VychanAI-Studio.zip",
   "download_page_url": "https://vychan.tech/download/",
   "download_checksum_url": "https://github.com/VychanTech/VychanAI-Studio-Releases/releases/download/v0.1.0-alpha.17/VychanAI-Studio.zip.sha256.txt",
-  "pricing_url": "https://vychan.tech/#pricing",
-  "marketplace_url": "https://vychan.tech/#templates",
+  "pricing_url": "https://vychan.tech/products/vai-studio/#access",
+  "marketplace_url": "https://vychan.tech/products/vai-studio/#templates",
   "account_url": "https://vychan.tech/signin/",
   "success_url": "https://vychan.tech/success/",
   "support_url": "https://vychan.tech/support/",
@@ -80,7 +80,7 @@
       "price_usd": 0,
       "category": "chat-game",
       "summary": "A beginner-friendly Twitch chat adventure starter for Streamer.bot.",
-      "marketplace_url": "https://vychan.tech/#templates"
+      "marketplace_url": "https://vychan.tech/products/vai-studio/#templates"
     },
     {
       "template_id": "chaos_wheel",
@@ -91,7 +91,7 @@
       "price_usd": 0,
       "category": "stream-reactions",
       "summary": "A safe random chat-event wheel with an optional reward idea.",
-      "marketplace_url": "https://vychan.tech/#templates"
+      "marketplace_url": "https://vychan.tech/products/vai-studio/#templates"
     },
     {
       "template_id": "stream_pet",
@@ -102,7 +102,7 @@
       "price_usd": 0,
       "category": "community-progression",
       "summary": "A cozy starter pet progression game with care commands and milestone rewards.",
-      "marketplace_url": "https://vychan.tech/#templates"
+      "marketplace_url": "https://vychan.tech/products/vai-studio/#templates"
     },
     {
       "template_id": "raid_boss",
@@ -113,7 +113,7 @@
       "price_usd": 5,
       "category": "event-game",
       "summary": "A community boss-fight event template with attacks, heals, MVPs, and manual reward buffs.",
-      "marketplace_url": "https://vychan.tech/#templates"
+      "marketplace_url": "https://vychan.tech/products/vai-studio/#templates"
     },
     {
       "template_id": "show_control_overlay",
@@ -124,11 +124,11 @@
       "price_usd": 20,
       "category": "show-control",
       "summary": "A guarded advanced template for chat-reviewed show moments, OBS cues, audio/TTS hooks, and optional local API control.",
-      "marketplace_url": "https://vychan.tech/#templates"
+      "marketplace_url": "https://vychan.tech/products/vai-studio/#templates"
     }
   ],
   "customer_notes": [
     "VAI Studio purchases link to your VychanTech account.",
-    "Twitch and Streamer.bot connections remain user-managed."
+    "Paid access is managed through your VychanTech account."
   ]
 }
