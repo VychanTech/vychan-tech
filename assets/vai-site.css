@@ -618,34 +618,40 @@ h3 { letter-spacing: 0; }
   margin: 12px 0 0;
 }
 
-.product-summary {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  margin: 42px 0;
-  overflow: hidden;
-  border: 1px solid var(--line-soft);
-  border-radius: 8px;
-  background: var(--line-soft);
-}
-
-.product-summary article {
-  padding: 22px;
-  background: var(--panel);
-}
-
-.product-summary h2 {
-  margin: 0 0 10px;
-}
-
-.product-summary p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.55;
-}
-
 .product-section {
   margin-top: 42px;
+}
+
+.access-list {
+  display: grid;
+  gap: 10px;
+  max-width: 860px;
+}
+
+.access-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.access-row h3 {
+  margin: 0 0 4px;
+  font-size: 19px;
+}
+
+.access-row p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.access-price {
+  min-width: 56px;
+  text-align: right;
+  font-size: 20px;
 }
 
 .muted-card { background: #141419; }
@@ -692,30 +698,6 @@ h3 { letter-spacing: 0; }
   background: var(--purple);
   color: #fff;
   font-weight: 900;
-}
-
-.template-columns {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  overflow: hidden;
-  border: 1px solid var(--line-soft);
-  border-radius: 8px;
-  background: var(--line-soft);
-}
-
-.template-columns article {
-  padding: 20px;
-  background: var(--panel);
-}
-
-.template-columns h3 {
-  margin-top: 0;
-}
-
-.template-columns p {
-  color: var(--muted);
-  line-height: 1.55;
 }
 
 .workflow-board {
@@ -1175,7 +1157,7 @@ code {
 }
 
 .entitlement-list,
-.checkout-history {
+.purchase-list {
   color: var(--muted);
   line-height: 1.5;
 }
@@ -1187,7 +1169,7 @@ code {
   margin: 14px 0;
 }
 
-.checkout-history { margin: 12px 0; }
+.purchase-list { margin: 12px 0; }
 
 .entitlement-row {
   display: flex;
@@ -1250,14 +1232,13 @@ code {
     min-height: auto;
   }
   .product-list-item,
-  .product-summary {
+  .access-row {
     grid-template-columns: 1fr;
   }
   .product-list-actions {
     justify-content: flex-start;
   }
-  .brand-strip,
-  .template-columns { grid-template-columns: 1fr; }
+  .brand-strip { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 620px) {

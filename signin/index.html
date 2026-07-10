@@ -4,33 +4,30 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VychanTech Account | VychanTech</title>
-  <meta name="description" content="Sign in to VychanTech, link VAI Studio, and manage template access.">
+  <meta name="description" content="Sign in to VychanTech and manage account access.">
   <link rel="canonical" href="https://vychan.tech/signin/">
   <meta property="og:title" content="VychanTech Account | VychanTech">
-  <meta property="og:description" content="Sign in to VychanTech, link VAI Studio, and manage template access.">
+  <meta property="og:description" content="Sign in to VychanTech and manage account access.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vychan.tech/signin/">
-  <link rel="stylesheet" href="/assets/vai-site.css?v=20260710-simple">
-  <script src="/assets/vai-site.js?v=20260710-simple" defer></script>
+  <link rel="stylesheet" href="/assets/vai-site.css?v=20260710-account-clean">
+  <script src="/assets/vai-site.js?v=20260710-account-clean" defer></script>
 </head>
 <body>
   <header class="site-header">
     <a class="brand" href="/" aria-label="VychanTech home"><span class="brand-mark">VT</span><span>VychanTech</span></a>
     <nav class="desktop-nav" aria-label="Primary navigation">
-      <a href="/">VAI Studio</a>
-      <a href="/#pricing">Pricing</a>
-      <a href="/download/">Download</a>
+      <a href="/">Home</a>
+      <a href="/products/">Products</a>
       <a href="/support/">Support</a>
     </nav>
-    <div class="header-actions" aria-label="Account and download actions">
+    <div class="header-actions" aria-label="Account actions">
       <a class="header-link" data-account-action="signin" href="/signin/" aria-current="page">Account</a>
-      <a class="header-cta" href="/download/">Download</a>
       <details class="mobile-menu">
         <summary aria-label="Open navigation menu"><span></span><span></span><span></span></summary>
         <nav class="mobile-nav" aria-label="Mobile navigation">
-          <a href="/">VAI Studio</a>
-          <a href="/#pricing">Pricing</a>
-          <a href="/download/">Download</a>
+          <a href="/">Home</a>
+          <a href="/products/">Products</a>
           <a href="/signin/" aria-current="page">Account</a>
           <a href="/support/">Support</a>
         </nav>
@@ -41,7 +38,7 @@
     <section class="page">
       <p class="eyebrow">VychanTech account</p>
       <h1>Your VAI Studio account</h1>
-      <p class="lede">Sign in, review access, buy upgrades, and connect the desktop app.</p>
+      <p class="lede">Sign in, review membership, and manage purchases.</p>
 
       <div class="auth-panel" id="auth-panel">
         <article class="auth-card">
@@ -137,9 +134,9 @@
           <div id="entitlement-list" class="entitlement-list">No paid entitlements loaded yet.</div>
         </section>
 
-        <section class="account-section" id="link-vai-studio">
+        <section class="account-section" id="link-vai-studio" hidden>
           <h2>Connect VAI Studio</h2>
-          <p class="small" id="link-mode-copy">Open VAI Studio and choose Connect Account. This page will show the connection approval here.</p>
+          <p class="small" id="link-mode-copy">Approve the VAI Studio connection request that opened this page.</p>
           <form id="link-form" class="account-form">
             <label for="link-code" id="link-code-label">Connection code</label>
             <div class="inline-form">
@@ -151,17 +148,17 @@
         </section>
 
         <section class="account-section" id="billing">
-          <h2>Upgrade</h2>
-          <p class="small">Choose a one-time lifetime upgrade. Purchases attach to this signed-in account.</p>
+          <h2>Purchases</h2>
+          <p class="small">Founder and Premium are one-time lifetime upgrades for this account.</p>
           <div class="checkout-options">
             <button class="button" type="button" data-checkout-sku="VAI-EARLY-FOUNDER-LIFETIME">Get Founder $5</button>
             <button class="button secondary" type="button" data-checkout-sku="VAI-PREMIUM-LIFETIME">Get Premium $20</button>
           </div>
-          <div id="checkout-history" class="checkout-history" hidden></div>
+          <div id="purchase-list" class="purchase-list" hidden></div>
           <p class="status-line" id="checkout-status" role="status" aria-live="polite" hidden></p>
           <details class="support-note">
             <summary>Need help?</summary>
-            <p>Email support@vychan.tech with your purchase email, PayPal transaction ID, SKU, and VAI Studio version.</p>
+            <p>Email support@vychan.tech with your purchase email, PayPal transaction ID, and VAI Studio version.</p>
           </details>
         </section>
       </div>
@@ -170,9 +167,9 @@
   <footer class="site-footer">
     <div>
       <strong>VychanTech</strong>
-      <p>Never send Twitch passwords, payment provider secrets, or Streamer.bot account credentials to VychanTech support.</p>
+      <p>Never send passwords, payment provider secrets, OAuth tokens, or private app files to VychanTech support.</p>
     </div>
-    <p><a href="/">VAI Studio</a> <a href="/download/">Download</a> <a href="/signin/">Account</a> <a href="/support/">Support</a></p>
+    <p><a href="/">Home</a> <a href="/products/">Products</a> <a href="/signin/">Account</a> <a href="/support/">Support</a></p>
   </footer>
   <script>
     const authPanel = document.getElementById("auth-panel");
@@ -203,6 +200,7 @@
     const loginTab = document.getElementById("auth-login-tab");
     const createTab = document.getElementById("auth-create-tab");
     const accountDashboard = document.getElementById("account-dashboard");
+    const linkSection = document.getElementById("link-vai-studio");
     const linkInput = document.getElementById("link-code");
     const linkCodeLabel = document.getElementById("link-code-label");
     const linkSubmit = document.getElementById("link-submit");
@@ -213,11 +211,12 @@
     const membershipTier = document.getElementById("membership-tier");
     const entitlementList = document.getElementById("entitlement-list");
     const checkoutStatus = document.getElementById("checkout-status");
-    const checkoutHistory = document.getElementById("checkout-history");
+    const purchaseList = document.getElementById("purchase-list");
     const refreshButton = document.getElementById("refresh-account");
     const params = new URLSearchParams(window.location.search);
     const incomingCode = params.get("link") || "";
-    const incomingSku = params.get("sku") || "";
+    const incomingPlan = (params.get("plan") || "").toLowerCase();
+    const incomingSku = params.get("sku") || planToSku(incomingPlan);
     if (incomingCode) {
       window.sessionStorage.setItem("vychanPendingLinkCode", incomingCode.toUpperCase());
     }
@@ -239,6 +238,7 @@
     setAuthMode(authMode);
     loadAuthConfig();
     if (activeLinkCode) {
+      linkSection.hidden = false;
       linkInput.value = activeLinkCode;
       linkInput.readOnly = true;
       linkInput.hidden = true;
@@ -385,7 +385,7 @@
       event.preventDefault();
       const code = linkInput.value.trim().toUpperCase();
       if (!code) {
-        setStatus(linkStatus, "Open VAI Studio and choose Connect Account first.", "warn");
+        setStatus(linkStatus, "Open VAI Studio and choose Account first.", "warn");
         return;
       }
       if (linkClaimInFlight) {
@@ -429,8 +429,8 @@
         accountDashboard.hidden = false;
         accountEmail.textContent = account.email || "VychanTech account";
         membershipTier.textContent = titleCase(account.tier || "free");
-        renderEntitlements(data.entitlements || []);
-        renderCheckouts(data.checkouts || []);
+        renderEntitlements(account.tier || "free", data.entitlements || []);
+        renderPurchases(data.checkouts || [], data.receipts || []);
         updateCheckoutButtons(account.tier || "free");
         updatePendingConnection(account.tier || "free");
         if (announce) {
@@ -659,32 +659,66 @@
         setStatus(element, "Sign in to continue.", "warn");
         return;
       }
-      setStatus(element, error.message, "warn");
+      setStatus(element, friendlyErrorMessage(error, element), "warn");
     }
 
-    function renderEntitlements(entitlements) {
+    function friendlyErrorMessage(error, element) {
+      const message = String(error && error.message || "");
+      const code = String(error && error.code || "");
+      if (element === checkoutStatus) {
+        if (/sku|order|capture|checkout_session|provider/i.test(`${code} ${message}`)) {
+          return "Checkout could not be completed. Refresh your account, then contact support if it continues.";
+        }
+      }
+      if (element === linkStatus) {
+        if (/sku|device|claim|code|token/i.test(`${code} ${message}`)) {
+          return "VAI Studio could not be connected. Reopen Account from the app and try again.";
+        }
+      }
+      return message || "The request could not be completed. Refresh the page and try again.";
+    }
+
+    function renderEntitlements(tier, entitlements) {
+      const normalizedTier = String(tier || "free").toLowerCase();
       if (!entitlements.length) {
         entitlementList.textContent = "Free templates are available. Paid templates unlock after Founder or Premium purchase.";
         return;
       }
-      entitlementList.innerHTML = entitlements.map((item) => {
-        const name = item.template_id || item.access_tier || item.sku || "entitlement";
-        const sku = item.sku ? ` <small>${escapeHtml(item.sku)}</small>` : "";
-        return `<div class="entitlement-row"><strong>${escapeHtml(titleCase(name))}</strong>${sku}</div>`;
-      }).join("");
+      const label = normalizedTier === "premium"
+        ? "Premium access"
+        : (normalizedTier === "founder" || normalizedTier === "early_founder" ? "Founder access" : "Free access");
+      const templateCount = entitlements.filter((item) => item && item.template_id).length;
+      const detail = templateCount
+        ? `${templateCount} paid template${templateCount === 1 ? "" : "s"} available`
+        : "Paid template access available";
+      entitlementList.innerHTML = `<div class="entitlement-row"><strong>${escapeHtml(label)}</strong><small>${escapeHtml(detail)}</small></div>`;
     }
 
-    function renderCheckouts(checkouts) {
-      if (!checkouts.length) {
-        checkoutHistory.hidden = true;
+    function renderPurchases(checkouts, receipts) {
+      const paidCheckouts = checkouts.filter((item) => {
+        const status = String(item && item.status || "").toLowerCase();
+        return status === "fulfilled";
+      });
+      if (!paidCheckouts.length && !receipts.length) {
+        purchaseList.hidden = true;
         return;
       }
-      checkoutHistory.hidden = false;
-      checkoutHistory.innerHTML = checkouts.map((item) => {
-        const status = titleCase(item.status || "created");
-        const sku = item.sku || "VAI Studio";
-        const paid = item.amount_usd ? `$${Number(item.amount_usd).toFixed(0)}` : "";
-        return `<div class="entitlement-row"><strong>${escapeHtml(status)}</strong><small>${escapeHtml(sku)} ${escapeHtml(paid)}</small></div>`;
+      const rows = paidCheckouts.length ? paidCheckouts.map((item) => ({
+        label: purchaseLabel(item),
+        date: item.captured_at || item.updated_at || item.created_at || "",
+        amount: formatMoney(item.amount_usd, item.currency),
+      })) : receipts.map((item) => ({
+        label: purchaseLabel(item),
+        date: item.issued_at || "",
+        amount: "",
+      }));
+      purchaseList.hidden = false;
+      purchaseList.innerHTML = rows.map((item) => {
+        const detail = [
+          item.date ? `Purchased ${formatDate(item.date)}` : "Purchased",
+          item.amount,
+        ].filter(Boolean).join(" - ");
+        return `<div class="entitlement-row"><strong>${escapeHtml(item.label)}</strong><small>${escapeHtml(detail)}</small></div>`;
       }).join("");
     }
 
@@ -696,7 +730,7 @@
         button.disabled = alreadyUnlocked;
         button.classList.toggle("disabled", alreadyUnlocked);
         if (alreadyUnlocked) {
-          button.textContent = "Already Unlocked";
+          button.textContent = "Purchased";
         }
       });
     }
@@ -708,7 +742,7 @@
       const needsUpgrade = activeSku && !tierCoversSku(tier, activeSku);
       linkSubmit.disabled = needsUpgrade;
       if (needsUpgrade) {
-        setStatus(linkStatus, "Upgrade this account first. After PayPal returns, connect VAI Studio here.", "pending");
+        setStatus(linkStatus, "Purchase the required access first. After PayPal returns, connect VAI Studio here.", "pending");
         return;
       }
       setStatus(linkStatus, "Ready to connect VAI Studio to this account.", "ok");
@@ -723,6 +757,56 @@
         return normalized === "early_founder" || normalized === "founder";
       }
       return false;
+    }
+
+    function planToSku(plan) {
+      const normalized = String(plan || "").toLowerCase();
+      if (normalized === "founder") {
+        return "VAI-EARLY-FOUNDER-LIFETIME";
+      }
+      if (normalized === "premium") {
+        return "VAI-PREMIUM-LIFETIME";
+      }
+      return "";
+    }
+
+    function purchaseLabel(item) {
+      const tier = String(item && (item.tier || item.access_tier) || "").toLowerCase();
+      const sku = String(item && item.sku || "").toUpperCase();
+      if (tier === "premium" || sku.includes("PREMIUM")) {
+        return "Premium";
+      }
+      if (tier === "founder" || tier === "early_founder" || sku.includes("FOUNDER")) {
+        return "Founder";
+      }
+      return "VAI Studio";
+    }
+
+    function formatMoney(amount, currency) {
+      const number = Number(amount);
+      if (!Number.isFinite(number) || number <= 0) {
+        return "";
+      }
+      const normalizedCurrency = String(currency || "USD").toUpperCase();
+      const formatter = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: normalizedCurrency,
+        minimumFractionDigits: Number.isInteger(number) ? 0 : 2,
+        maximumFractionDigits: 2,
+      });
+      return formatter.format(number);
+    }
+
+    function formatDate(value) {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) {
+        return "recently";
+      }
+      return new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      }).format(date);
     }
 
     function setStatus(element, message, tone) {

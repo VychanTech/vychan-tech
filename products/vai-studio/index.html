@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VAI Studio | VychanTech</title>
-  <meta name="description" content="VAI Studio product information, downloads, and account-linked template access.">
+  <meta name="description" content="VAI Studio product information, download, and account access.">
   <link rel="canonical" href="https://vychan.tech/products/vai-studio/">
   <meta property="og:title" content="VAI Studio | VychanTech">
-  <meta property="og:description" content="VAI Studio product information, downloads, and account-linked template access.">
+  <meta property="og:description" content="VAI Studio product information, download, and account access.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vychan.tech/products/vai-studio/">
   <link rel="stylesheet" href="/assets/vai-site.css?v=20260710-clean">
@@ -38,7 +38,7 @@
     <section class="page product-detail">
       <p class="eyebrow">Product</p>
       <h1 class="product-title">VAI Studio</h1>
-      <p class="product-tagline">Apply Streamer.bot templates, manage account access, and keep creator workflows repeatable.</p>
+      <p class="product-tagline">A Windows app for applying and managing Streamer.bot template workflows.</p>
       <div class="actions">
         <a class="button" href="https://github.com/VychanTech/VychanAI-Studio-Releases/releases/download/v0.1.0-alpha.17/VychanAI-Studio.zip">Download</a>
         <a class="button secondary" href="/signin/">Open account</a>
@@ -58,60 +58,36 @@
         </div>
       </details>
 
-      <section class="product-summary" aria-label="VAI Studio summary">
-        <article>
-          <h2>Builder</h2>
-          <p>VAI Studio keeps template setup repeatable: choose a template, review the included setup notes, export what you need, and verify the result inside Streamer.bot.</p>
-        </article>
-        <article>
-          <h2>Account access</h2>
-          <p>Free, Founder, and Premium access is attached to your VychanTech account. Sign in inside VAI Studio to see the templates available to you.</p>
-        </article>
-      </section>
-
       <section id="access" class="product-section">
         <div class="section-heading">
           <p class="eyebrow">Access</p>
-          <h2>Simple lifetime tiers.</h2>
+          <h2>Choose your access.</h2>
         </div>
-        <div class="grid plans">
-          <article class="card plan-card" id="free">
-            <span class="pill">Free</span>
-            <h2>Free Starter</h2>
-            <p class="price">$0</p>
-            <p>Includes basic templates bundled with VAI Studio.</p>
+        <div class="access-list">
+          <article class="access-row" id="free">
+            <div>
+              <h3>Free</h3>
+              <p>Basic templates included.</p>
+            </div>
+            <strong class="access-price">$0</strong>
             <a class="button secondary" href="https://github.com/VychanTech/VychanAI-Studio-Releases/releases/download/v0.1.0-alpha.17/VychanAI-Studio.zip">Download</a>
           </article>
-        <article class="card plan-card" id="vai-early-founder-lifetime">
-          <span class="pill">Early Founder</span>
-          <h2>VAI Studio Early Founder</h2>
-          <p class="price">$5 one-time</p>
-          <p>Founder-tier local template access, public tier updates, and founder status for this VAI Studio activation.</p>
-          <p class="small">Start from your VychanTech account so the purchase attaches to the right email.</p>
-          <ul><li>Basic templates</li><li>Unlocks Founder templates</li><li>Founder template updates</li><li>Founder status in VAI Studio</li></ul>
-          <a class="button" href="/signin/?sku=VAI-EARLY-FOUNDER-LIFETIME">Get Founder</a>
-        </article>
-        <article class="card plan-card" id="vai-premium-lifetime">
-          <span class="pill">Premium</span>
-          <h2>VAI Studio Premium</h2>
-          <p class="price">$20 one-time</p>
-          <p>Premium-tier local template access for advanced Streamer.bot templates and public premium tier updates.</p>
-          <p class="small">Start from your VychanTech account so the purchase attaches to the right email.</p>
-          <ul><li>Basic templates</li><li>Unlocks Founder templates</li><li>Unlocks Premium templates</li><li>Premium template updates</li></ul>
-          <a class="button" href="/signin/?sku=VAI-PREMIUM-LIFETIME">Get Premium</a>
-        </article>
-        </div>
-      </section>
-
-      <section id="templates" class="product-section">
-        <div class="section-heading">
-          <p class="eyebrow">Templates</p>
-          <h2>Template access by tier.</h2>
-        </div>
-        <div class="template-columns">
-          <article><h3>Basic</h3><p>Chat Adventure Starter, Chaos Wheel Starter, and Community Pet Starter</p></article>
-          <article><h3>Founder</h3><p>Raid Boss Battle</p></article>
-          <article><h3>Premium</h3><p>Show Control Overlay</p></article>
+          <article class="access-row" id="vai-early-founder-lifetime">
+            <div>
+              <h3>Founder</h3>
+              <p>Unlocks Founder templates.</p>
+            </div>
+            <strong class="access-price">$5</strong>
+            <a class="button" href="/signin/?plan=founder">Get Founder</a>
+          </article>
+          <article class="access-row" id="vai-premium-lifetime">
+            <div>
+              <h3>Premium</h3>
+              <p>Unlocks all current premium templates.</p>
+            </div>
+            <strong class="access-price">$20</strong>
+            <a class="button" href="/signin/?plan=premium">Get Premium</a>
+          </article>
         </div>
       </section>
     </section>
