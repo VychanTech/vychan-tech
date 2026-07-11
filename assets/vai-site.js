@@ -37,6 +37,53 @@
     return String(tier || "free").toLowerCase();
   }
 
+  function campaignContext() {
+    const params = new URLSearchParams(window.location.search);
+    const campaignId = String(
+      params.get("campaign") || document.body.dataset.campaignId || "",
+    ).toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 64);
+    const pagePath = document.body.dataset.campaignPage || window.location.pathname;
+    if (!campaignId || !["/products/vai-studio/", "/signin/"].includes(pagePath)) {
+      return null;
+    }
+    return { campaignId, pagePath };
+  }
+
+  function emitCampaignEvent(context, eventType) {
+    if (!context) {
+      return;
+    }
+    fetch("/api/campaign/event", {
+      method: "POST",
+      credentials: "omit",
+      cache: "no-store",
+      keepalive: true,
+      referrerPolicy: "no-referrer",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        campaign_id: context.campaignId,
+        event_type: eventType,
+        page_path: context.pagePath,
+      }),
+    }).catch(() => {});
+  }
+
+  function wireCampaignEvents() {
+    const context = campaignContext();
+    if (!context) {
+      return;
+    }
+    emitCampaignEvent(context, "view");
+    document.querySelectorAll("[data-campaign-event]").forEach((element) => {
+      element.addEventListener("click", () => {
+        if (element.getAttribute("aria-disabled") === "true" || !element.getAttribute("href")) {
+          return;
+        }
+        emitCampaignEvent(context, element.dataset.campaignEvent);
+      });
+    });
+  }
+
   function isFounderTier(tier) {
     const normalized = normalizedTier(tier);
     return normalized === "founder" || normalized === "early_founder";
@@ -249,6 +296,7 @@
 
   onReady(async () => {
     wireHeaderMenu(document.querySelector(".mobile-menu"));
+    wireCampaignEvents();
     const data = await loadAccount();
     if (!data) {
       window.dispatchEvent(new CustomEvent("vychan-account-unavailable"));
