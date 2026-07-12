@@ -75,6 +75,13 @@
     }
     emitCampaignEvent(context, "view");
     document.querySelectorAll("[data-campaign-event]").forEach((element) => {
+      if (element.matches("a[data-plan-action]") && element.getAttribute("href")) {
+        const destination = new URL(element.getAttribute("href"), window.location.origin);
+        if (destination.origin === window.location.origin) {
+          destination.searchParams.set("campaign", context.campaignId);
+          element.setAttribute("href", destination.pathname + destination.search + destination.hash);
+        }
+      }
       element.addEventListener("click", () => {
         if (element.getAttribute("aria-disabled") === "true" || !element.getAttribute("href")) {
           return;
