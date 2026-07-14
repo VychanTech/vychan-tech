@@ -43,7 +43,9 @@
       params.get("campaign") || document.body.dataset.campaignId || "",
     ).toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 64);
     const pagePath = document.body.dataset.campaignPage || window.location.pathname;
-    if (!campaignId || !["/products/vai-studio/", "/signin/"].includes(pagePath)) {
+    if (!campaignId || ![
+      "/products/vai-studio/", "/products/vai-studio/founder/", "/signin/",
+    ].includes(pagePath)) {
       return null;
     }
     return { campaignId, pagePath };
